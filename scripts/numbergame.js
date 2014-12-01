@@ -4,7 +4,9 @@
 var number = {};
 
 function newNumber() {
-    return Math.ceil(Math.random() * 100);
+	var n =  Math.ceil(Math.random() * 100);
+	// irc.privmsg('nooitaf', '' + n);
+    	return n;
 }
 
 function isPlaying(replyTo) {

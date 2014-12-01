@@ -1,7 +1,7 @@
 module.exports = [
     'admin',
     'autojoin',
-    'bitly',
+    // 'bitly',
     'botsnack',
     'coin',
     'counter',
@@ -10,9 +10,9 @@ module.exports = [
     'excuse',
     'fire',
     'greet',
-    'googl',
+    // 'googl',
     'help',
-    'nickserv',
+    // 'nickserv',
     'numbergame',
     'ping',
     'rockpaperscissors',
@@ -20,7 +20,13 @@ module.exports = [
     'smack',
     'tell',
     'time',
-
-    'twitter',
-    'title'
+    'fucks',
+    'badum',
+	'sadtrombone',
+    'twss',
+    'btc',
+    'speak'
+    // 'twitter',
+    // 'title'
 ];
+
