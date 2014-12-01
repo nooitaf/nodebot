@@ -137,7 +137,7 @@ EXCUSES = [
 "halon system went off and killed the operators.",
 "because Bill Gates is a Jehovah's witness and so nothing can work on St. Swithin's day.",
 "user to computer ratio too high.",
-"user to computer ration too low.",
+"user to computer ratio too low.",
 "we just switched to Sprint.",
 "it has Intel Inside",
 "Sticky bits on disk.",
