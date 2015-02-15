@@ -2,7 +2,7 @@
 // This code is licensed under the MIT license; see LICENSE.txt for details.
 
 // This script handles the following functions:
-//     btc - look up current btc market status
+//     ltc - look up current ltc market status from bitcoincharts.com
 
 var request = require('request'),
   entities = require('./lib/entities'),
@@ -11,27 +11,43 @@ var request = require('request'),
 
 
 function printHelp(replyTo){
-  irc.privmsg(replyTo, '~btc [amount, default 1] [[eur,usd]]');
+  irc.privmsg(replyTo, '~ltc [amount, default 1] [[eur,usd,btc]] ~ sauce = bitcoincharts.com');
 }
 
 
 function calc(replyTo, market, amount, fiat){
-  var btc = {
-    "eur": parseFloat(market["EUR"]["24h"]),
-    "usd": parseFloat(market["USD"]["24h"])
+
+  var bucket = {};
+  market.forEach(function(item){
+    if (item.symbol === "krakenLTC") {
+      bucket['ltc2btc'] = item.avg;
+    }
+    if (item.symbol === "btceEUR") {
+      bucket['btc2eur'] = item.avg;
+    }
+    if (item.symbol === "btceUSD") {
+      bucket['btc2usd'] = item.avg;
+    }
+  })
+
+  var ltc = {
+    "usd": parseFloat( bucket.btc2usd*(1/bucket.ltc2btc) ),
+    "eur": parseFloat( bucket.btc2eur*(1/bucket.ltc2btc) ),
+    "btc": parseFloat( 1/bucket.ltc2btc )
   }
+  
   var output = '';
   var amount = parseFloat(amount);
   if(fiat) {
-    if (fiat === 'eur' || fiat === 'usd'){
-      output = '' + amount.toFixed(2) + ' ' + fiat.toUpperCase() + ' ~ ' + (1.0/btc[fiat]*amount).toFixed(8) + ' BTC';
+    if (fiat === 'usd' || fiat === 'eur' || fiat === 'btc'){
+      output = '' + amount.toFixed(2) + ' ' + fiat.toUpperCase() + ' ~ ' + (1.0/ltc[fiat]*amount).toFixed(8) + ' LTC';
     }
   } else {
     output = 
-      '' + amount + ' BTC ~' + 
-      ' USD ' + (btc.usd * amount).toFixed(2) + ' ~' +
-      ' EUR ' + (btc.eur * amount).toFixed(2) + ' '; 
-
+      '' + amount + ' LTC =' + 
+      ' USD ' + (ltc.usd * amount).toFixed(2) + ' ~' +
+      ' EUR ' + (ltc.eur * amount).toFixed(2) + ' ~' +
+      ' BTC ' + (ltc.btc * amount).toFixed(4) + ''; 
   }
 
   irc.privmsg(replyTo, output.toString("utf8"))
@@ -39,9 +55,9 @@ function calc(replyTo, market, amount, fiat){
 
 
 
-listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
+listen(regexFactory.startsWith(["ltc"]), function (match, data, replyTo, from) {
 
-  var url = 'http://api.bitcoincharts.com/v1/weighted_prices.json';
+  var url = 'http://api.bitcoincharts.com/v1/markets.json';
 
   var requestObject = {
     uri: url,
@@ -85,14 +101,6 @@ listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
       irc.privmsg(replyTo,"error: could not get market");
     }
   });
-  //return market;
-
-
-
-  // if (params.length !== 2) {
-  //   params = 'help';
-  //   return;
-  // }
 
 });
 

@@ -25,8 +25,15 @@ module.exports = [
 	'sadtrombone',
     'twss',
     'btc',
-    'speak'
+    'death',
+    'tits',
+    'speak',
+    'mac',
+    'oui',
+    'newyear',
+    'ltc',
+    'telegram',
+    'slogan'
     // 'twitter',
     // 'title'
 ];
-

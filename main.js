@@ -134,7 +134,8 @@ var irc = global.nodebot = (function () {
          * 0x16 is "reverse" (swaps fg and bg colors) in mIRC
          */
         return data.replace(/\n/g, "\\n").replace(/\r/g, "\\r")
-            .replace(/[^\x02-\x03|\x16|\x20-\x7e]/g, "");
+            //.replace(/[^\x02-\x03|\x16|\x20-\x7e]/g, "");
+            //.replace(/[^\x02-\x03|\x16|\x20-\x7e]/g, "");
     }
 
     function uncacheModules() {
@@ -247,6 +248,7 @@ var irc = global.nodebot = (function () {
                 user = sanitize(user); //avoid sanitizing these more than once
                 if (sanitizeMessage !== false) {
                     message = sanitize(message);
+                    //message = message;
                 }
                 
                 var privmsg = "PRIVMSG " + user + " :";

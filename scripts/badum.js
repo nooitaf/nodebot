@@ -5,6 +5,8 @@
 //     ~botsnack - hooray!
 
 listen(regexFactory.only("badum"), function(match, data, replyTo) {
+  irc.privmsg('NURDbot', '!speak Tishshshshsh');
+  setTimeout(function(){
     irc.privmsg(replyTo, "*Tsssss!*");
-    irc.privmsg('NURDbot', '!speak Tishshsh');
+  },700);
 });
