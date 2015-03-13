@@ -2,7 +2,8 @@
 // This code is licensed under the MIT license; see LICENSE.txt for details.
 
 // This script handles the following functions:
-//     slogan - make a slogan from an input
+//     anti - make a anti-slogan from an input
+//            Original list from: http://www.thinkslogans.com/slogans/anti-drug-slogans/
 
 var listOfSlogans = [
   "Don’t Huff, Don’t Puff. Keep away from that ____!",
@@ -63,20 +64,6 @@ var request = require('request'),
 listen(regexFactory.startsWith(["anti"]), function (match, data, replyTo, from) {
   var words = match[1];
   var words = words.trim();
-  // while (   words.replace(/    /g, '    ').length < words.length){
-  //   words = words.replace(/    /g, '    ');
-  // }
-  // var words = match[1].split(' ').join(' ');
-  // irc.privmsg(replyTo,'-ßß¬¬¬ßsadda');
-  // var words = match[1].toString('utf8');
-  // words = words.replace(/\\/g, "");
-  // words = words.replace(/'/g, "");
-  // words = words.replace(/"/g, "");
-  // words = words.replace(/`/g, "");
-  // words = words.replace(/\./g, "");
-  // words = words.replace(/,/g, "");
-  // words = words.replace(/-/g, " ");
-  //words = words.split(' ').join('%20');
   if (words === 'help' || !words) {
     irc.privmsg(replyTo,"~anti [words] | " + listOfSlogans.length + " antis | Original list from: http://www.thinkslogans.com/slogans/anti-drug-slogans/");
     return;
