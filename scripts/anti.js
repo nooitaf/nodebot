@@ -1,6 +1,3 @@
-// (c) 2012 Richard Carter
-// This code is licensed under the MIT license; see LICENSE.txt for details.
-
 // This script handles the following functions:
 //     anti - make a anti-slogan from an input
 //            Original list from: http://www.thinkslogans.com/slogans/anti-drug-slogans/
