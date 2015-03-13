@@ -33,7 +33,8 @@ module.exports = [
     'newyear',
     'ltc',
     'telegram',
-    'slogan'
+    'slogan',
+    'anti'
     // 'twitter',
     // 'title'
 ];
