@@ -15,11 +15,11 @@ function privmsg_throttled(replyTo, msg) {
     }
 }
 
-var HELLOS = ['hello', 'hi', 'howdy', 'hola'],
+var HELLOS = ['hello', 'hi!', 'howdy', 'hola'],
     BYES = ['goodbye', 'bye', 'cya', 'adios', 'ttyl'];
 
 listen(regexFactory.startsWith(HELLOS, "optional"), function(match, data, replyTo) {
-    privmsg_throttled(replyTo, "Hello!");
+    privmsg_throttled(replyTo, HELLOS[ Math.floor( (HELLOS.length-1)*Math.random()) ]);
 });
 
 listen(regexFactory.startsWith(BYES, "optional"), function(match, data, replyTo) {

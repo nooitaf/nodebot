@@ -13,3 +13,6 @@
 listen(/^PING :(.+)$/i, function(match) {
     irc.pong(match[1]);
 });
+listen(regexFactory.startsWith("ping"), function(match, data, replyTo) {
+    irc.privmsg(replyTo, Math.round(Math.random()) ? "pong" : "bong" );
+});

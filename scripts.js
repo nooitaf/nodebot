@@ -34,7 +34,8 @@ module.exports = [
     'ltc',
     'telegram',
     'slogan',
-    'anti'
+    'anti',
+    'title',
+    'status'
     // 'twitter',
-    // 'title'
 ];

@@ -2,6 +2,8 @@
 //     anti - make a anti-slogan from an input
 //            Original list from: http://www.thinkslogans.com/slogans/anti-drug-slogans/
 
+var db = require('./lib/listdb').getDB('anti');
+
 var listOfSlogans = [
   "Don’t Huff, Don’t Puff. Keep away from that ____!",
   "Lions, and Tigers and Bears oh my…____? Goodbye!",
@@ -65,6 +67,7 @@ listen(regexFactory.startsWith(["anti"]), function (match, data, replyTo, from) 
     irc.privmsg(replyTo,"~anti [words] | " + listOfSlogans.length + " antis | Original list from: http://www.thinkslogans.com/slogans/anti-drug-slogans/");
     return;
   } else {
+    if (!db.hasValue(words)) db.add(words);
     words = words.capitalize();
     var slogan = randomSlogan().split('____').join(words);
     irc.privmsg(replyTo,slogan); 

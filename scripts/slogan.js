@@ -1,6 +1,9 @@
 // This script handles the following functions:
 //     slogan - make a slogan from an input
 
+
+var db = require('./lib/listdb').getDB('pro');
+
 var listOfSlogans = [
   "151 Countries, One ____",
   "3-in-1 Protection for your ____",
@@ -586,13 +589,14 @@ var request = require('request'),
   entities = require('./lib/entities'),
   fs = require('fs');
 
-listen(regexFactory.startsWith(["slogan","pro"]), function (match, data, replyTo, from) {
+listen(regexFactory.startsWith(["slogan","pro","dat"]), function (match, data, replyTo, from) {
   var words = match[1];
   var words = words.trim();
   if (words === 'help' || !words) {
     irc.privmsg(replyTo,"~slogan [words] | " + listOfSlogans.length + " slogans | Original list from: thesurrealist.co.uk");
     return;
   } else {
+    if (!db.hasValue(words)) db.add(words);
     words = words.capitalize();
     var slogan = randomSlogan().split('____').join(words);
     irc.privmsg(replyTo,slogan); 
