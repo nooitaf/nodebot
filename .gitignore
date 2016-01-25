@@ -4,3 +4,7 @@ data/
 node_modules/
 scripts/*.local.js
 *.log
+
+scripts/telegram.js
+
+scripts/telegram.js

@@ -101,7 +101,8 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
                 // trim front and back
                 title = title.replace(/^\s+/, "");
                 title = title.replace(/\s+$/, "");
-                
+                title = title.replace(/\r?\n|\r/gm, "");
+
                 // decode HTML entities
                 title = entities.decode(title);
 

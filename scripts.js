@@ -1,4 +1,5 @@
 module.exports = [
+//    'telegram',
     'admin',
     'autojoin',
     // 'bitly',
@@ -22,7 +23,7 @@ module.exports = [
     'time',
     'fucks',
     'badum',
-	'sadtrombone',
+    'sadtrombone',
     'twss',
     'btc',
     'death',
@@ -32,10 +33,11 @@ module.exports = [
     'oui',
     'newyear',
     'ltc',
-    'telegram',
     'slogan',
     'anti',
     'title',
-    'status'
+    'status',
+    // 'sizer',
+    'love'
     // 'twitter',
 ];

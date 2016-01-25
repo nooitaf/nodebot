@@ -57,3 +57,9 @@ exports.matches = function (regexStrings, prefixed) {
         "PRIVMSG [^ ]+ :" + makePrefix(prefixed) + matchAny(regexStrings, false), "i");
 };
 
+exports.matchesAnywhere = function (regexString, prefixed) {
+    var regexPath = "PRIVMSG [^ ]+ :(.*?)" + regexString + "(.*?)";
+    console.log(regexPath);
+    return new RegExp(regexPath, "i");
+};
+

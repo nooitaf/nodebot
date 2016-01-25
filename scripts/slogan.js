@@ -1,3 +1,6 @@
+// (c) 2012 Richard Carter
+// This code is licensed under the MIT license; see LICENSE.txt for details.
+
 // This script handles the following functions:
 //     slogan - make a slogan from an input
 
@@ -592,6 +595,20 @@ var request = require('request'),
 listen(regexFactory.startsWith(["slogan","pro","dat"]), function (match, data, replyTo, from) {
   var words = match[1];
   var words = words.trim();
+  // while (   words.replace(/    /g, '    ').length < words.length){
+  //   words = words.replace(/    /g, '    ');
+  // }
+  // var words = match[1].split(' ').join(' ');
+  // irc.privmsg(replyTo,'-ßß¬¬¬ßsadda');
+  // var words = match[1].toString('utf8');
+  // words = words.replace(/\\/g, "");
+  // words = words.replace(/'/g, "");
+  // words = words.replace(/"/g, "");
+  // words = words.replace(/`/g, "");
+  // words = words.replace(/\./g, "");
+  // words = words.replace(/,/g, "");
+  // words = words.replace(/-/g, " ");
+  //words = words.split(' ').join('%20');
   if (words === 'help' || !words) {
     irc.privmsg(replyTo,"~slogan [words] | " + listOfSlogans.length + " slogans | Original list from: thesurrealist.co.uk");
     return;
