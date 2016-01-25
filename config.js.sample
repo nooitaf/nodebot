@@ -33,4 +33,11 @@ global.nodebot_prefs = {
     /* twitter */
     twitter_consumerkey: '',
     twitter_secret: ''
+
+    /* telegram */
+    telegram_token: '',
+    telegram_chatId:  false, 
+    telegram_chatIdPrivate:  false, 
+    telegram_ircChannel: ''
+
 };
