@@ -1,41 +1,187 @@
-
-buzzword_attr = new Array( 
-"bio wearable", "privacy", "cooking","artsy", "painting", "responsive", "interactive", "repairing", "green/eco", "downloading", "medical", "inductive",
-"solar", "energy", "retrotechtacular", "musical", "secure", "lockpicking", "multitouch", 'open source', "portable", "teardown", "wearable", "harvesting",
-"wireless", 'chemical', "selfdestroying", "connected", "optical", "cleaning", "self healing", "vulnerable", "autonomous", "self-aware", "simplified", 
-"anthropomorphistic", "mechanical", "adhesive", "automated", "weaponized", "blinking", "biodegradable", "universal", "sustainable", "charitable",
-"magnetic", "voice controlled", "tiny", "tweeting", "self-balancing", "water resistant", "water proof", "hydroponic", "thermal", "tunable", "3d printed",
-"crypto", "ultra-sonic" , "nuclear", "radio-active", "online"
+buzzword_attr = new Array(
+    "3d printed",
+    "adhesive",
+    "anthropomorphistic",
+    "artsy",
+    "automated",
+    "autonomous",
+    "bio wearable",
+    "biodegradable",
+    "blinking",
+    "charitable",
+    "cleaning",
+    "connected",
+    "cooking",
+    "crypto",
+    "downloading",
+    "energy",
+    "green/eco",
+    "harvesting",
+    "hydroponic",
+    "inductive",
+    "interactive",
+    "lockpicking",
+    "magnetic",
+    "mechanical",
+    "medical",
+    "multitouch",
+    "musical",
+    "nuclear",
+    "online",
+    "optical",
+    "painting",
+    "portable",
+    "privacy",
+    "radio-active",
+    "repairing",
+    "responsive",
+    "retrotechtacular",
+    "secure",
+    "self healing",
+    "self-aware",
+    "self-balancing",
+    "selfdestroying",
+    "simplified",
+    "solar",
+    "sustainable",
+    "teardown",
+    "thermal",
+    "tiny",
+    "tunable",
+    "tweeting",
+    "ultra-sonic",
+    "universal",
+    "voice controlled",
+    "vulnerable",
+    "water proof",
+    "water resistant",
+    "weaponized",
+    "wearable",
+    "wireless",
+    'chemical',
+    'open source'
 );
 
 buzzword = new Array(
-"IoT", "mobile App", "data mining","Big Data", "machine learning", "3d Printer", "Android", "Arduino", "ARM processor", "Beer", 
-"PDA", "car", "cellphone", "clock", "cnc", "computer", "cooking", "Crowd Funding", "digital camera", "download", "drink",
-"drone", "Engine", "energy", "FPGA", "search engine", "GPS", "Hackerspace", "handheld", "ham radio", "entertainment", "home", 
-"induction", "internet", "mp3 player", "eBook reader", "laptop", "laser", "led", "lifehacks", "linux", "lockpicking",
-"Microcontroller", "MIDI", "Network",  "peripheral", "phone", "Game console", "podcast", "audio device", "radio", "Raspberry Pi",  
-"robot", "security", "servo", "slider", "tablet", "tool", "toy", "transportation", "video device", "Virtual Reality", "weapon", 
-"sleep", "dream", "exoskeleton", "wheelchair", 'fusion', "ePaper", "painting", "workbench", "carbon", "automation", "rfid", "smartwatch", 
-"coffee", 'BTLE', 'ESP8266', 'Supercapacitor', 'graphene', 'glue gun', "injection", 'space ship', 'cloud', "monitor", "printer", 
-"wheatherstation", "sensor array", "door bell", "light switch", "instrument", "pet", "soldering", "projector", "USB Dongle", "garden", "prosthetic",
-"flashlight", "Nixie Tube", "LED cube", "RGB", "Accelerometer", "magic smoke", "key fob"
+    "3d Printer",
+    "Accelerometer",
+    "Android",
+    "Arduino",
+    "ARM processor",
+    "audio device",
+    "automation",
+    "Beer",
+    "Big Data",
+    "car",
+    "carbon",
+    "cellphone",
+    "clock",
+    "cnc",
+    "coffee",
+    "computer",
+    "cooking",
+    "Crowd Funding",
+    "data mining",
+    "digital camera",
+    "door bell",
+    "download",
+    "dream",
+    "drink",
+    "drone",
+    "eBook reader",
+    "energy",
+    "Engine",
+    "entertainment",
+    "ePaper",
+    "exoskeleton",
+    "flashlight",
+    "FPGA",
+    "Game console",
+    "garden",
+    "GPS",
+    "Hackerspace",
+    "ham radio",
+    "handheld",
+    "home",
+    "induction",
+    "injection",
+    "instrument",
+    "internet",
+    "IoT",
+    "key fob",
+    "laptop",
+    "laser",
+    "LED cube",
+    "led",
+    "lifehacks",
+    "light switch",
+    "linux",
+    "lockpicking",
+    "machine learning",
+    "magic smoke",
+    "Microcontroller",
+    "MIDI",
+    "mobile App",
+    "monitor",
+    "mp3 player",
+    "Network",
+    "Nixie Tube",
+    "painting",
+    "PDA",
+    "peripheral",
+    "pet",
+    "phone",
+    "podcast",
+    "printer",
+    "projector",
+    "prosthetic",
+    "radio",
+    "Raspberry Pi",
+    "rfid",
+    "RGB",
+    "robot",
+    "search engine",
+    "security",
+    "sensor array",
+    "servo",
+    "sleep",
+    "slider",
+    "smartwatch",
+    "soldering",
+    "tablet",
+    "tool",
+    "toy",
+    "transportation",
+    "USB Dongle",
+    "video device",
+    "Virtual Reality",
+    "weapon",
+    "wheatherstation",
+    "wheelchair",
+    "workbench",
+    'BTLE',
+    'cloud',
+    'ESP8266',
+    'fusion',
+    'glue gun',
+    'graphene',
+    'space ship',
+    'Supercapacitor'
 );
 
-function generateBuzzwords()
-{
-	var random1 = getRandomInt (0, buzzword_attr.length);
-	var random2 = getRandomInt (0, buzzword.length);
-	var random3 = getRandomInt (0, buzzword.length);
-	var text = buzzword_attr[random1] + ' ' + buzzword[random2];
-	if (Math.floor(Math.random()+.5))
-	{
-		text += ' ' + buzzword[random3];
-	}
-	return text
+function generateBuzzwords() {
+    var random1 = getRandomInt(0, buzzword_attr.length);
+    var random2 = getRandomInt(0, buzzword.length);
+    var random3 = getRandomInt(0, buzzword.length);
+    var text = buzzword_attr[random1] + ' ' + buzzword[random2];
+    if (Math.floor(Math.random() + .5)) {
+        text += ' ' + buzzword[random3];
+    }
+    return text
 }
 
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+    return Math.floor(Math.random() * (max - min)) + min;
 }
 
 String.prototype.capitalize = function() {
@@ -46,19 +192,19 @@ String.prototype.capitalize = function() {
 var db = require('./lib/listdb').getDB('buzzwords');
 
 var request = require('request'),
-  entities = require('./lib/entities'),
-  fs = require('fs');
+    entities = require('./lib/entities'),
+    fs = require('fs');
 
-listen(regexFactory.startsWith(["idea","buzzwordproject","project"]), function (match, data, replyTo, from) {
-  var words = match[1];
-  words = words.trim()
-  if (words === 'help') {
-    irc.privmsg(replyTo,"~idea,~buzzwordproject,~project | Combine buzzwords randomly | Original generator from: http://davedarko.com/buzzwords/index.html");
-    return;
-  } else {
-    var buzzwords = generateBuzzwords()
-    buzzwords = buzzwords.capitalize();
-    if (!db.hasValue(buzzwords)) db.add(buzzwords);
-    irc.privmsg(replyTo,buzzwords); 
-  } 
+listen(regexFactory.startsWith(["idea", "buzzwordproject", "project"]), function(match, data, replyTo, from) {
+    var words = match[1];
+    words = words.trim()
+    if (words === 'help') {
+        irc.privmsg(replyTo, "~idea,~buzzwordproject,~project | Combine buzzwords randomly | Original generator from: http://davedarko.com/buzzwords/index.html");
+        return;
+    } else {
+        var buzzwords = generateBuzzwords()
+        buzzwords = buzzwords.capitalize();
+        if (!db.hasValue(buzzwords)) db.add(buzzwords);
+        irc.privmsg(replyTo, buzzwords);
+    }
 })
