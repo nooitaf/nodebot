@@ -39,6 +39,7 @@ module.exports = [
     'status',
     // 'sizer',
     'love',
-    'buzzwords'
+    'buzzwords',
+    'colortest'
     // 'twitter',
 ];
