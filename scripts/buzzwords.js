@@ -195,11 +195,11 @@ var request = require('request'),
     entities = require('./lib/entities'),
     fs = require('fs');
 
-listen(regexFactory.startsWith(["idea", "buzzwordproject", "project"]), function(match, data, replyTo, from) {
+listen(regexFactory.startsWith(["idea", "bizwordproject", "bwp", "bw", "project"]), function(match, data, replyTo, from) {
     var words = match[1];
     words = words.trim()
     if (words === 'help') {
-        irc.privmsg(replyTo, "~idea,~buzzwordproject,~project | Combine buzzwords randomly | Original generator from: http://davedarko.com/buzzwords/index.html");
+        irc.privmsg(replyTo, "~idea,~bizwordproject,~bwp,~bw,~project | Combine buz7_words randomly | Original generator from: http://davedarko.com/bu zzwords/index.html"); // typo for buz z ;P
         return;
     } else {
         var buzzwords = generateBuzzwords()
