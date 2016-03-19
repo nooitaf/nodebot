@@ -40,6 +40,7 @@ module.exports = [
     // 'sizer',
     'love',
     'buzzwords',
-    'colortest'
+    'colortest',
+    'foul'
     // 'twitter',
 ];
