@@ -706,10 +706,13 @@ listen(regexFactory.startsWith(["vuil", "vies"]), function(match, data, replyTo,
         showHelp(replyTo)
         return;
     } else {
-        var text = FoulGenerate([nl_combinations])
+        var text = String(words)
+        text = text ? text + ' = ' : ""
+        text = text + FoulGenerate([nl_combinations])
         text = text.capitalize();
         if (!db.hasValue(text)) db.add(text);
         irc.privmsg(replyTo, text)
+        irc.privmsg('NURDbot', '!espreek ' + say);
     }
 })
 
@@ -720,10 +723,13 @@ listen(regexFactory.startsWith(["foul"]), function(match, data, replyTo, from) {
         showHelp(replyTo)
         return;
     } else {
-        var text = FoulGenerate([combinations])
+        var text = String(words)
+        text = text ? text + ' = ' : ""
+        text = FoulGenerate([combinations])
         text = text.capitalize();
         if (!db.hasValue(text)) db.add(text);
         irc.privmsg(replyTo, text)
+        irc.privmsg('NURDbot', '!espeak ' + say);
     }
 })
 
@@ -734,9 +740,20 @@ listen(regexFactory.startsWith(["foil"]), function(match, data, replyTo, from) {
         showHelp(replyTo)
         return;
     } else {
-        var text = FoulGenerate([combinations, nl_combinations])
+        var nl = parseInt(Math.round(Math.random()))
+        var text = String(words)
+        text = text ? text + ' = ' : ""
+        if (nl)
+            text = FoulGenerate([combinations])
+        else
+            text = FoulGenerate([nl_combinations])
+        
         text = text.capitalize();
         if (!db.hasValue(text)) db.add(text);
         irc.privmsg(replyTo, text)
+        if (nl)
+            irc.privmsg('NURDbot', '!espreek ' + text);
+        else
+            irc.privmsg('NURDbot', '!espeak ' + text);
     }
 })
