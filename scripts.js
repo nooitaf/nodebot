@@ -2,6 +2,7 @@ module.exports = [
 //    'telegram',
     'admin',
     'autojoin',
+    'available',
     // 'bitly',
     'botsnack',
     'coin',
@@ -41,6 +42,7 @@ module.exports = [
     'love',
     'buzzwords',
     'colortest',
-    'foul'
+    'foul',
+    'ipv6'
     // 'twitter',
 ];
