@@ -152,6 +152,39 @@ function isNumber(n) {
 }
 
 
+listen(regexFactory.startsWith(["blocks"]), function (match, data, replyTo, from) {
+
+  var url = 'https://blockexplorer.com/api/status?q=getBlockCount';
+  var requestObject = {
+    uri: url,
+    strictSSL: false,
+    timeout: 2000,
+    encoding: null,
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31 Nodebot'
+    }
+  };
+
+  request(requestObject, function(error, response, body) {
+    if(response.statusCode == 200) {
+      var result = JSON.parse(body)
+      if (result && result.blockcount) {
+        var blocks = parseInt(result.blockcount)
+        var blocksleft = 420000 - blocks
+        var blockslefttext = ""
+        if (blocksleft) {
+          blockslefttext = " | blocks to go: " + blocksleft
+        }
+        var text = "btc blockcount: " + blocks + "" + blockslefttext
+        irc.privmsg(replyTo,text);
+        
+      }
+    } else {
+      irc.privmsg(replyTo,"error: could not get blockcount");
+    }
+  });
+
+});
 
 
 
