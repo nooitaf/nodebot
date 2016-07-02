@@ -148,7 +148,7 @@ function isNumber(n) {
 
 listen(regexFactory.startsWith(["blocks"]), function(match, data, replyTo, from) {
 
-  var url = 'https://blockexplorer.com/api/status?q=getBlockCount';
+  var url = 'https://blockchain.info/stats?format=json';
   var requestObject = {
     uri: url,
     strictSSL: false,
