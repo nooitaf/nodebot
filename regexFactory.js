@@ -38,6 +38,11 @@ function matchAny(strings, escaped) {
         + ")";
 }
 
+exports.password = function () {
+    return new RegExp(
+            "^(PASS |PRIVMSG " + nodebot_prefs.nickserv_nickname + " :IDENTIFY )", "i");
+};
+
 exports.only = function (keywords, prefixed) {
     keywords = ensureArray(keywords);
 
@@ -51,10 +56,10 @@ exports.startsWith = function (keywords, prefixed) {
         "PRIVMSG [^ ]+ :" + makePrefix(prefixed) + matchAny(keywords) + "\\b ?(.*)$", "i");
 };
 
-exports.matches = function (regexStrings, prefixed) {
+exports.matches = function (regexStrings, prefixed, only) {
     regexStrings = ensureArray(regexStrings);
     return new RegExp(
-        "PRIVMSG [^ ]+ :" + makePrefix(prefixed) + matchAny(regexStrings, false), "i");
+        "PRIVMSG [^ ]+ :" + makePrefix(prefixed) + matchAny(regexStrings, false) + (only ? "$" : ""), "i");
 };
 
 exports.matchesAnywhere = function (regexString, prefixed) {

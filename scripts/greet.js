@@ -6,12 +6,14 @@
 //     join in on greeting someone when someone else greets them.
 //     Same thing for "goodbye" and "bye"
 
+require('./config.js');
+
 var waiting = false;
 function privmsg_throttled(replyTo, msg) {
     if(!waiting) {
-        irc.privmsg(replyTo, msg);
+        irc.privmsg(replyTo, msg, false);
         waiting = true;
-        setTimeout(function(){ waiting = false; }, 3000);
+        setTimeout(function(){ waiting = false; }, 10000);
     }
 }
 
@@ -22,7 +24,14 @@ listen(regexFactory.startsWith(HELLOS, "optional"), function(match, data, replyT
     privmsg_throttled(replyTo, HELLOS[ Math.floor( (HELLOS.length-1)*Math.random()) ]);
 });
 
-listen(regexFactory.startsWith(BYES, "optional"), function(match, data, replyTo) {
-    privmsg_throttled(replyTo, "Goodbye!");
-});
+function permutations(greetings, suffixes, punctuation) {
+    return "(?:" + greetings.join("|") + ")(?: " + suffixes.join("| ") + ")?" +
+        "(?:" + punctuation.join("|") + ")?";
+}
+
+function listenWithResponse(regexString, replyMessage) {
+    listen(regexFactory.matches(regexString, "optional", true), function(match, data, replyTo) {
+        privmsg_throttled(replyTo, replyMessage);
+    });
+}
 

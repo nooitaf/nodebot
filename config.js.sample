@@ -5,6 +5,7 @@ global.nodebot_prefs = {
     realname: 'Nodebot v0.8',
     nickname: 'nodebot1337',
     username: 'nodebot1337',
+    serverpass: null,
 
     /* NickServ details, case-insensitive.
      * Note: regex characters must be escaped, as these values are placed
@@ -27,17 +28,14 @@ global.nodebot_prefs = {
     bitly_username: '',
     bitly_apikey: '',
 
-    /* goo.gl see http://goo.gl/4DvFk */
-    googl_key: '',
+    /* Google API - https://code.google.com/apis/console/?noredirect
+     * Currently used for the goo.gl library. Visit the above URL and register
+     * an application. Enable the URL Shortener API. Copy and paste the API key
+     * from the API Access page into here.
+     */
+    google_api_key: '',
 
     /* twitter */
     twitter_consumerkey: '',
     twitter_secret: ''
-
-    /* telegram */
-    telegram_token: '',
-    telegram_chatId:  false, 
-    telegram_chatIdPrivate:  false, 
-    telegram_ircChannel: ''
-
 };

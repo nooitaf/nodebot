@@ -7,8 +7,15 @@ var util = require('util'),
     fs = require('fs'),
     vm = require('vm'),
     repl = require('repl'),
-    _ = require('lodash'),
-    listdb = require('./lib/listdb');
+    _ = require('lodash');
+
+function uncacheModules() {
+    // Clear the module cache
+    var key;
+    for (key in require.cache) {
+        delete require.cache[key];
+    }
+}
 
 var irc = global.nodebot = (function () {
     var buffer, ignoredb, listeners, socket;
@@ -24,7 +31,7 @@ var irc = global.nodebot = (function () {
 
     listeners = [];
 
-    ignoredb = listdb.getDB('ignore');
+    ignoredb = require('./lib/listdb').getDB('ignore');
 
     var pingServer = _.debounce(function () {
         irc.ping();
@@ -37,7 +44,12 @@ var irc = global.nodebot = (function () {
             console.error("ERROR tried to send data > 510 chars in length: " + data);
         } else {
             socket.write(data + '\r\n', 'utf8', function () {
-                console.log("-> " + data);
+                var sensitiveMatch = require('./regexFactory').password().exec(data);
+                if (sensitiveMatch) {
+                    console.log("-> " + sensitiveMatch[1] + "***");
+                } else {
+                    console.log("-> " + data);
+                }
             });
             pingServer();
         }
@@ -105,7 +117,7 @@ var irc = global.nodebot = (function () {
                     // and replyTo to the front, since it is always needed
                     listenerRequestStop = listeners[i][1](match, data, replyTo, from);
                 } catch (err) {
-                    console.log("Caught error in script " + listeners[i][3] + ": " + err);
+                    console.log("Caught error in script " + listeners[i][4] + ": " + err);
                 }
                 if (listeners[i][2] /* once */) {
                     listeners.splice(i, 1);
@@ -138,14 +150,6 @@ var irc = global.nodebot = (function () {
             //.replace(/[^\x02-\x03|\x16|\x20-\x7e]/g, "");
     }
 
-    function uncacheModules() {
-        // Clear the module cache
-        var key;
-        for (key in require.cache) {
-            delete require.cache[key];
-        }
-    }
-
     return {
         /* The following function gives full power to scripts;
          * you may want to no-op this function for security reasons, if you
@@ -157,9 +161,12 @@ var irc = global.nodebot = (function () {
         sanitize: function (data) {
             return sanitize(data);
         },
-        connect: function (host, port, nickname, username, realname) {
+        connect: function (host, port, nickname, username, realname, serverpass) {
             port = port || 6667;
             socket.connect(port, host, function () {
+                if (serverpass) {
+                    send('PASS ' + sanitize(serverpass));
+                }
                 send('NICK ' + sanitize(nickname));
                 send('USER ' + sanitize(username) + ' localhost * ' + sanitize(realname));
             });
@@ -171,7 +178,9 @@ var irc = global.nodebot = (function () {
             uncacheModules();
 
             listeners = [];
+
             scripts = require('./scripts');
+
             for (i = 0; i < scripts.length; i++) {
                 console.log("Loading script " + scripts[i] + "...");
                 script = fs.readFileSync('scripts/' + scripts[i] + '.js');
@@ -203,6 +212,13 @@ var irc = global.nodebot = (function () {
                                 prefixed = true;
                             }
                             listeners.push([dataRegex, callback, once, prefixed, scriptName]);
+                        },
+                        listen_admin: function (dataRegex, callback, once, prefixed) {
+                            sandbox.listen(dataRegex, function(match, data, replyTo, from) {
+                                if (require('./lib/admins').is(from)) {
+                                    callback(match, data, replyTo, from);
+                                }
+                            }, once, prefixed);
                         }
                     };
                     try {
@@ -285,6 +301,8 @@ process.on('uncaughtException', function (err) {
 });
 
 irc.loadScripts();
-irc.connect(nodebot_prefs.server, nodebot_prefs.port, nodebot_prefs.nickname, nodebot_prefs.username, nodebot_prefs.realname);
+irc.connect(nodebot_prefs.server, nodebot_prefs.port, nodebot_prefs.nickname,
+        nodebot_prefs.username, nodebot_prefs.realname,
+        nodebot_prefs.serverpass);
 
 repl.start({ prompt: '> ', ignoreUndefined: true });

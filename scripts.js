@@ -1,14 +1,18 @@
 module.exports = [
 //    'telegram',
+    'weather',
     'admin',
     'autojoin',
     'available',
     // 'bitly',
     'botsnack',
     'coin',
+    'colortest',
     'counter',
     'dice',
+    'doyou',
     'emoticons',
+    'eval',
     'excuse',
     'fire',
     'greet',
@@ -43,6 +47,7 @@ module.exports = [
     'buzzwords',
     'colortest',
     'foul',
-    'ipv6'
+    'ipv6',
+    'balls'
     // 'twitter',
 ];
