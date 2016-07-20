@@ -18,7 +18,7 @@ module.exports = [
     'greet',
     // 'googl',
     'help',
-    // 'nickserv',
+    'nickserv',
     'numbergame',
     'ping',
     'rockpaperscissors',
