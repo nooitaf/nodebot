@@ -19,7 +19,8 @@
         "oauth": "~0.9.11",
         "request": "~2.30.0",
         "timeago": "~0.1.0",
-        "node-telegram-bot-api": "^0.15.0"
+        "node-telegram-bot-api": "^0.15.0",
+        "weather-js": "^1.0.2"
     },
     "engines": {
         "node": "~0.10.36"
