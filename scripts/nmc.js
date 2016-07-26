@@ -10,6 +10,9 @@ function printHelp(replyTo){
   irc.privmsg(replyTo, '~nmc [amount, default 1] [[usd,btc]] ~ sauce = btc-2.com');
 }
 
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 calc = function(replyTo, market, amount, fiat){
   var bucket = {}
