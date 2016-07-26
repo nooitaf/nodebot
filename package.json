@@ -17,11 +17,12 @@
         "goo.gl": "~0.1.2",
         "lodash": "~2.4.1",
         "oauth": "~0.9.11",
-        "request": "~2.30.0",
         "timeago": "~0.1.0",
         "node-telegram-bot-api": "^0.15.0",
         "weather-js": "^1.0.2",
-        "request": "^2.74.0"
+        "request": "^2.74.0",
+        "jquery": "^3.1.0",
+        "jsdom": "^9.4.1"
     },
     "engines": {
         "node": "~0.10.36"
