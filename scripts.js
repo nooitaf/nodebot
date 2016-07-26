@@ -49,5 +49,6 @@ module.exports = [
     'foul',
     'ipv6',
     'balls'
+    'nmc'
     // 'twitter',
 ];
