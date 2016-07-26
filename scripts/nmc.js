@@ -25,8 +25,8 @@ calc = function(replyTo, market, amount, fiat){
     }
   })
   var nmc = {
-    'btc': parseFloat(1.0/bucket.btc2nmc),
-    'usd': parseFloat(1.0/bucket.usd2nmc)
+    'btc': parseFloat(bucket.btc2nmc),
+    'usd': parseFloat(bucket.usd2nmc)
   }
   var output = '';
   var amount = parseFloat(amount) || 1;
@@ -37,8 +37,8 @@ calc = function(replyTo, market, amount, fiat){
   } else {
     output =
       '' + amount + ' NMC =' +
-      ' USD ' + (1/nmc.usd * amount).toFixed(2) + ' ~' +
-      ' BTC ' + (1/nmc.btc * amount).toFixed(4) + '';
+      ' USD ' + (nmc.usd * amount).toFixed(2) + ' ~' +
+      ' BTC ' + (nmc.btc * amount).toFixed(4) + '';
   }
   irc.privmsg(replyTo, output.toString("utf8"))
 }
