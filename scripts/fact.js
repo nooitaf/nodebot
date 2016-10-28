@@ -11,7 +11,7 @@ var facts = {
 var facts_categories = Object.keys(facts);
 
 function printHelp(replyTo) {
-    irc.privmsg(replyTo, 'Help: ~fact [category], ~fact-categories, ~fact-add [category] [text]');
+    irc.privmsg(replyTo, 'Help: ~fact [category], ~factadd [category] [text], ~factcategories');
 }
 
 function printHelpCategories(replyTo) {
@@ -41,21 +41,18 @@ function showRandomWithCategory(replyTo, category) {
     chosenCategory = category || 'interesting';
     categoryFacts = facts[chosenCategory].getAll();
     fact = categoryFacts[Math.floor(Math.random() * categoryFacts.length)];
-    irc.privmsg(replyTo, fact, false);
+    irc.privmsg(replyTo, chosenCategory + ': ' + fact, false);
 }
 
 function addFact(replyTo, category, text) {
     var chosenCategory;
     chosenCategory = category || 'nurds';
     facts[chosenCategory].add(text);
-    irc.privmsg(replyTo, 'Fact added to ' + category, false);
+    irc.privmsg(replyTo, 'Fact added to ' + category + '.', false);
 }
 
 
 listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
-    // console.log('fact should be heeeere',match, data, replyTo)
-    console.log(match[0])
-    // if (match[0] !== 'fact') return;
     var params;
     if (match[1].trim().length === 0) {
         showRandom(replyTo);
@@ -78,11 +75,11 @@ listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
     }
 });
 
-listen(regexFactory.startsWith(["fcat"]), function (match, data, replyTo) {
+listen(regexFactory.startsWith(["factcategories"]), function (match, data, replyTo) {
     printHelpCategories(replyTo);
 });
 
-listen(regexFactory.startsWith(["fadd"]), function (match, data, replyTo) {
+listen(regexFactory.startsWith(["factadd"]), function (match, data, replyTo) {
     var params, category, text;
     params = match[1].split(' ');
     if (params.length !== 1 && params.length !== 2) {
