@@ -86,7 +86,7 @@ listen(regexFactory.startsWith(["factcategories"]), function (match, data, reply
 listen(regexFactory.startsWith(["factadd"]), function (match, data, replyTo) {
     var params, category, text;
     params = match[1].split(' ');
-    if (params.length !== 1 && params.length !== 2) {
+    if (params.length !== 1) {
         printHelp(replyTo);
         return;
     }
@@ -99,8 +99,8 @@ listen(regexFactory.startsWith(["factadd"]), function (match, data, replyTo) {
     category = 'nurds';
     if (isFactCategory(params[0])) {
         category = params[0];
+        params[0] = '';
     }
-    params[0] = '';
     text = params.join(' ').trim();
     if (text) {
       addFact(replyTo, category, text);
