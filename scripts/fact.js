@@ -53,8 +53,9 @@ function addFact(replyTo, category, text) {
 
 
 listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
-    console.log(match[0])
-    if (match[0] !== 'fact') return;
+    // console.log('fact should be heeeere',match, data, replyTo)
+    // console.log(match[0])
+    // if (match[0] !== 'fact') return;
     var params;
     if (match[1].trim().length === 0) {
         showRandom(replyTo);
@@ -77,11 +78,11 @@ listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
     }
 });
 
-listen(regexFactory.startsWith(["fact\-categories"]), function (match, data, replyTo) {
+listen(regexFactory.startsWith(["fcat"]), function (match, data, replyTo) {
     printHelpCategories(replyTo);
 });
 
-listen(regexFactory.startsWith(["fact\-add"]), function (match, data, replyTo) {
+listen(regexFactory.startsWith(["fadd"]), function (match, data, replyTo) {
     var params, category, text;
     params = match[1].split(' ');
     if (params.length !== 1 && params.length !== 2) {
