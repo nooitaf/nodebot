@@ -5,7 +5,8 @@ var facts = {
     food: require('./lib/listdb').getDB('facts-food'),
     sports: require('./lib/listdb').getDB('facts-sports'),
     chucknorris: require('./lib/listdb').getDB('facts-chucknorris'),
-    nurds: require('./lib/listdb').getDB('facts-nurds')
+    nurds: require('./lib/listdb').getDB('facts-nurds'),
+    spurious: require('./lib/listdb').getDB('facts-spurious')
 };
 
 var facts_categories = Object.keys(facts);
