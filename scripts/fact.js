@@ -11,7 +11,7 @@ var facts = {
 var facts_categories = Object.keys(facts);
 
 function printHelp(replyTo) {
-    irc.privmsg(replyTo, 'Help: ~fact [category], ~factadd [category] [text], ~factcategories');
+    irc.privmsg(replyTo, 'Help: ~fact [category], ~factcategories, ~factadd [category] [text], ~factremove [category] [text],');
 }
 
 function printHelpCategories(replyTo) {
@@ -49,6 +49,13 @@ function addFact(replyTo, category, text) {
     chosenCategory = category || 'nurds';
     facts[chosenCategory].add(text);
     irc.privmsg(replyTo, 'Fact added to ' + category + '.', false);
+}
+
+function removeFact(replyTo, category, text) {
+    var chosenCategory;
+    chosenCategory = category || 'nurds';
+    facts[chosenCategory].remove(text);
+    irc.privmsg(replyTo, 'Fact removed from ' + category + '.', false);
 }
 
 
@@ -104,6 +111,32 @@ listen(regexFactory.startsWith(["factadd"]), function (match, data, replyTo) {
     text = params.join(' ').trim();
     if (text) {
       addFact(replyTo, category, text);
+    } else {
+      irc.privmsg(replyTo, 'y u no text?', false);
+    }
+});
+
+listen(regexFactory.startsWith(["factremove"]), function (match, data, replyTo) {
+    var params, category, text;
+    params = match[1].split(' ');
+    if (!params.length) {
+        printHelp(replyTo);
+        return;
+    }
+
+    if (params[0] === 'help') {
+        printHelp(replyTo);
+        return;
+    }
+
+    category = 'nurds';
+    if (isFactCategory(params[0])) {
+        category = params[0];
+        params[0] = '';
+    }
+    text = params.join(' ').trim();
+    if (text) {
+      removeFact(replyTo, category, text);
     } else {
       irc.privmsg(replyTo, 'y u no text?', false);
     }
