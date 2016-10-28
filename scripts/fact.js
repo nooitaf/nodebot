@@ -11,7 +11,7 @@ var facts = {
 var facts_categories = Object.keys(facts);
 
 function printHelp(replyTo) {
-    irc.privmsg(replyTo, 'Help: ~fact [category], ~factcategories, ~factadd [category] [text], ~factremove [category] [text],');
+    irc.privmsg(replyTo, 'Help: ~fact [category], ~factcategories, ~factadd [category] [text], ~factremove [category] [text]');
 }
 
 function printHelpCategories(replyTo) {
