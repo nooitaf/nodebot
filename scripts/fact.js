@@ -151,5 +151,5 @@ listen(regexFactory.startsWith(["factremove"]), function (match, data, replyTo) 
     }
 });
 listen(regexFactory.startsWith(["factcount"]), function (match, data, replyTo) {
-  printFactCount();
+  printFactCount(replyTo);
 });
