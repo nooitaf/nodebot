@@ -77,11 +77,11 @@ listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
     }
 });
 
-listen(regexFactory.startsWith(["fact-categories"]), function (match, data, replyTo) {
+listen(regexFactory.startsWith(["fact\-categories"]), function (match, data, replyTo) {
     printHelpCategories(replyTo);
 });
 
-listen(regexFactory.startsWith(["fact-add"]), function (match, data, replyTo) {
+listen(regexFactory.startsWith(["fact\-add"]), function (match, data, replyTo) {
     var params, category, text;
     params = match[1].split(' ');
     if (params.length !== 1 && params.length !== 2) {
