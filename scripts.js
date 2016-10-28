@@ -14,6 +14,7 @@ module.exports = [
     'emoticons',
     'eval',
     'excuse',
+    'fact',
     'fire',
     'greet',
     // 'googl',
