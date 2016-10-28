@@ -75,6 +75,10 @@ listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
     }
 });
 
+listen(regexFactory.startsWith(["facthelp"]), function (match, data, replyTo) {
+    printHelp(replyTo);
+});
+
 listen(regexFactory.startsWith(["factcategories"]), function (match, data, replyTo) {
     printHelpCategories(replyTo);
 });
@@ -98,5 +102,9 @@ listen(regexFactory.startsWith(["factadd"]), function (match, data, replyTo) {
     }
     params[0] = '';
     text = params.join(' ').trim();
-    addFact(replyTo, category, text);
+    if (text) {
+      addFact(replyTo, category, text);
+    } else {
+      irc.privmsg(replyTo, 'y u no text?', false);
+    }
 });
