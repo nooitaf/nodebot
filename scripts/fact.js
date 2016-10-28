@@ -8,7 +8,7 @@ var facts = {
     nurds: require('./lib/listdb').getDB('facts-nurds')
 };
 
-var facts_categories = Object.keys(facts)
+var facts_categories = Object.keys(facts);
 
 function printHelp(replyTo) {
     irc.privmsg(replyTo, 'Help: ~fact [category], ~fact-categories, ~fact-add [category] [text]');
@@ -19,85 +19,85 @@ function printHelpCategories(replyTo) {
 }
 
 function isFactCategory(str) {
-    for (var i in facts_categories) {
+    var i;
+    for (i in facts_categories) {
         if (facts_categories[i] === str) {
-            return true
+            return true;
         }
     }
-    return false
+    return false;
 }
 
 function showRandom(replyTo) {
-    var randomCategory = facts_categories[Math.floor(Math.random() * facts_categories.length)]
-    var categoryFacts = facts[randomCategory].getAll()
-    var categoryFactsCount = categoryFacts.length
-    var fact = categoryFacts[Math.floor(Math.random() * categoryFacts.length)]
+    var randomCategory, categoryFacts, fact;
+    randomCategory = facts_categories[Math.floor(Math.random() * facts_categories.length)];
+    categoryFacts = facts[randomCategory].getAll();
+    fact = categoryFacts[Math.floor(Math.random() * categoryFacts.length)];
     irc.privmsg(replyTo, fact, false);
 }
 
 function showRandomWithCategory(replyTo, category) {
-    var chosenCategory = category || 'interesting'
-    var categoryFacts = facts[chosenCategory].getAll()
-    var categoryFactsCount = categoryFacts.length
-    var fact = categoryFacts[Math.floor(Math.random() * categoryFacts.length)]
+    var chosenCategory, categoryFacts, fact;
+    chosenCategory = category || 'interesting';
+    categoryFacts = facts[chosenCategory].getAll();
+    fact = categoryFacts[Math.floor(Math.random() * categoryFacts.length)];
     irc.privmsg(replyTo, fact, false);
 }
 
-
-listen(regexFactory.startsWith(["fact"]), function(match, data, replyTo) {
-    // default
-    if (match[1].trim().length === 0) {
-        showRandom(replyTo)
-        return;
-    }
-
-    var params = match[1].split(' ');
-    if (params.length !== 1) {
-        printHelpCategories(replyTo)
-        return;
-    }
-
-    if (params[0] === 'help') {
-        printHelp(replyTo)
-        return;
-    }
-
-    for (var i in facts_categories) {
-        var cat = facts_categories[i]
-        if (cat === params[0]) {
-            showRandomWithCategory(replyTo, cat)
-        }
-    }
-});
-
-listen(regexFactory.startsWith(["fact-categories"]), function(match, data, replyTo) {
-    printHelpCategories(replyTo)
-});
-
-listen(regexFactory.startsWith(["fact-add"]), function(match, data, replyTo) {
-
-    var params = match[1].split(' ');
-    if (params.length !== 1 && params.length !== 2) {
-        printHelp(replyTo)
-        return;
-    }
-
-    if (params[0] === 'help') {
-        printHelp(replyTo)
-        return;
-    }
-
-    var category = 'nurds'
-    if (isFactCategory(params[0])) {
-        category = params[0]
-    }
-    params[0] = '';
-    var text = params.join(' ').trim()
-    addFact(replyTo, category, text)
-});
-
-function addFact(replace, category, text) {
-    var chosenCategory = category || 'nurds'
-    var facts[chosenCategory].add(text)
+function addFact(replyTo, category, text) {
+    var chosenCategory;
+    chosenCategory = category || 'nurds';
+    facts[chosenCategory].add(text);
     irc.privmsg(replyTo, 'Fact added to ' + category, false);
 }
+
+
+listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
+    var params;
+
+    if (match[1].trim().length === 0) {
+        showRandom(replyTo);
+        return;
+    }
+
+    params = match[1].split(' ');
+    if (params.length !== 1) {
+        printHelpCategories(replyTo);
+        return;
+    }
+
+    if (params[0] === 'help') {
+        printHelp(replyTo);
+        return;
+    }
+
+    if (isFactCategory(params[0])) {
+        showRandomWithCategory(replyTo, params[0]);
+    }
+});
+
+listen(regexFactory.startsWith(["fact-categories"]), function (match, data, replyTo) {
+    printHelpCategories(replyTo);
+});
+
+listen(regexFactory.startsWith(["fact-add"]), function (match, data, replyTo) {
+    var params, category, text;
+    params = match[1].split(' ');
+    if (params.length !== 1 && params.length !== 2) {
+        printHelp(replyTo);
+        return;
+    }
+
+    if (params[0] === 'help') {
+        printHelp(replyTo);
+        return;
+    }
+
+    category = 'nurds';
+    if (isFactCategory(params[0])) {
+        category = params[0];
+    }
+    params[0] = '';
+    text = params.join(' ').trim();
+    addFact(replyTo, category, text);
+});
