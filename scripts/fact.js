@@ -54,7 +54,7 @@ function addFact(replyTo, category, text) {
 
 listen(regexFactory.startsWith(["fact"]), function (match, data, replyTo) {
     // console.log('fact should be heeeere',match, data, replyTo)
-    // console.log(match[0])
+    console.log(match[0])
     // if (match[0] !== 'fact') return;
     var params;
     if (match[1].trim().length === 0) {
