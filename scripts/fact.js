@@ -11,11 +11,20 @@ var facts = {
 var facts_categories = Object.keys(facts);
 
 function printHelp(replyTo) {
-    irc.privmsg(replyTo, 'Help: ~fact [category], ~factcategories, ~factadd [category] [text], ~factremove [category] [text]');
+    irc.privmsg(replyTo, 'Help: ~fact [category], ~factcategories, ~factcount, ~factadd [category] [text], ~factremove [category] [text]');
 }
 
 function printHelpCategories(replyTo) {
     irc.privmsg(replyTo, 'Categories: ' + facts_categories.join(', '));
+}
+
+function printFactCount(replyTo) {
+    var i, output;
+    output = '';
+    for(i in facts_categories){
+      output = output + facts_categories[i] + ':' + facts[facts_categories[i]].getAll().length + ' ';
+    }
+    irc.privmsg(replyTo, output);
 }
 
 function isFactCategory(str) {
@@ -140,4 +149,7 @@ listen(regexFactory.startsWith(["factremove"]), function (match, data, replyTo) 
     } else {
       irc.privmsg(replyTo, 'y u no text?', false);
     }
+});
+listen(regexFactory.startsWith(["factcount"]), function (match, data, replyTo) {
+  printFactCount();
 });
