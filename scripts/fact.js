@@ -33,7 +33,7 @@ function showRandom(replyTo) {
     randomCategory = facts_categories[Math.floor(Math.random() * facts_categories.length)];
     categoryFacts = facts[randomCategory].getAll();
     fact = categoryFacts[Math.floor(Math.random() * categoryFacts.length)];
-    irc.privmsg(replyTo, fact, false);
+    irc.privmsg(replyTo, randomCategory + ': ' + fact, false);
 }
 
 function showRandomWithCategory(replyTo, category) {
