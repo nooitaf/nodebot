@@ -11,7 +11,7 @@
 //     ~reload - reload scripts
 
 require('./config.js');
-var admins = require('./lib/admins');
+var admins = require('./lib/admins.js');
 
 listen(regexFactory.startsWith("secret"), function(match, data, replyTo, from) {
     if (admins.is(from)) {
@@ -81,4 +81,3 @@ listen_admin(regexFactory.only('reload'), function(match, data, replyTo) {
 listen_admin(regexFactory.startsWith('raw'), function(match) {
     irc.raw(match[1]);
 });
-
