@@ -19,7 +19,7 @@ listen(regexFactory.startsWith(["date", "time"]), function (match, data, replyTo
   var moment = require('moment-timezone');
   var zone_names = moment.tz.names();
   where = where.replace(' ','_');
-  var where_regex = new RegExp(where, 'g');
+  var where_regex = new RegExp(where, 'gi');
   var found_tz = undefined;
 
   for (var i in zone_names) {
