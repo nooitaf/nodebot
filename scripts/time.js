@@ -28,7 +28,7 @@ listen(regexFactory.startsWith(["date", "time"]), function (match, data, replyTo
     }
   }
   if (found_tz) {
-    var output = moment().tz(found_tz).toString() + '-' + found_tz
+    var output = moment().tz(found_tz).toString() + ' - ' + found_tz
     irc.privmsg(replyTo, output);
   } else {
     irc.privmsg(replyTo, "no " + where + ", sorry");
