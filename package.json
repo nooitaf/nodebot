@@ -1,7 +1,7 @@
 {
     "name": "nodebot",
     "private": true,
-    "version": "0.3.0",
+    "version": "0.3.1",
     "author": "Richard Carter <richard@richardcarter.org>",
     "description": "IRC bot written in node.js",
     "repository": {
@@ -23,7 +23,9 @@
         "request": "^2.74.0",
         "jquery": "^3.1.0",
         "jsdom": "^9.4.1",
-        "moment-timezone": "^0.5.10"
+        "moment-timezone": "^0.5.10",
+        "tor-request": "^1.0.6",
+        "weather-js": "^1.0.2"
     },
     "engines": {
         "node": "~0.10.36"

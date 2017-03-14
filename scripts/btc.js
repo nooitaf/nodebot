@@ -30,17 +30,17 @@ function calc(replyTo, market, amount, fiat){
   if(fiat === 'eur' || fiat === 'usd') {
     output = '' + amount.toFixed(2) + ' ' + fiat.toUpperCase() + ' ~ ' + (1.0/btc[fiat]*amount).toFixed(8) + ' BTC';
   } else {
-    output = 
-      '' + amount + ' BTC =' + 
+    output =
+      '' + amount + ' BTC =' +
       ' USD ' + (btc.usd * amount).toFixed(2) + ' ~' +
-      ' EUR ' + (btc.eur * amount).toFixed(2) + ' '; 
+      ' EUR ' + (btc.eur * amount).toFixed(2) + ' ';
 
   }
 
   irc.privmsg(replyTo, output.toString("utf8"))
 }
 
-
+var tr = require('tor-request');
 
 listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
 
@@ -82,9 +82,9 @@ listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
       if (isNumber(params[0]) && !isNumber(params[1])){
 
         calc(
-          replyTo, 
-          market, 
-          parseFloat(params[0]), 
+          replyTo,
+          market,
+          parseFloat(params[0]),
           params[1]
           );
         return;
@@ -93,9 +93,9 @@ listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
       if (!isNumber(params[0]) && isNumber(params[1])){
 
         calc(
-          replyTo, 
-          market, 
-          parseFloat(params[1]), 
+          replyTo,
+          market,
+          parseFloat(params[1]),
           params[0]
           );
         return;
@@ -109,14 +109,14 @@ listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
           return;
         } else {
           calc(
-            replyTo, 
-            market, 
-            parseFloat(1), 
+            replyTo,
+            market,
+            parseFloat(1),
             params[0]
             );
           return;
         }
-      } 
+      }
 
       if (!isNumber(params[0]) && !isNumber(params[1])){
         console.log('not number 1 + 2param ')
@@ -125,9 +125,9 @@ listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
       }
 
       calc(
-        replyTo, 
-        market, 
-        parseFloat(params[0]), 
+        replyTo,
+        market,
+        parseFloat(params[0]),
         params[1]
         );
 
@@ -177,7 +177,7 @@ listen(regexFactory.startsWith(["blocks"]), function (match, data, replyTo, from
         }
         var text = "btc blockcount: " + blocks + "" + blockslefttext
         irc.privmsg(replyTo,text);
-        
+
       }
     } else {
       irc.privmsg(replyTo,"error: could not get blockcount");
@@ -211,10 +211,10 @@ listen(regexFactory.startsWith(["blocks"]), function (match, data, replyTo, from
 //       output = '' + amount.toFixed(2) + ' ' + fiat.toUpperCase() + ' ~ ' + (1.0/btc[fiat]*amount).toFixed(8) + ' BTC';
 //     }
 //   } else {
-//     output = 
-//       '' + amount + ' BTC =' + 
+//     output =
+//       '' + amount + ' BTC =' +
 //       ' USD ' + (btc.usd * amount).toFixed(2) + ' ~' +
-//       ' EUR ' + (btc.eur * amount).toFixed(2) + ' '; 
+//       ' EUR ' + (btc.eur * amount).toFixed(2) + ' ';
 
 //   }
 
@@ -258,9 +258,9 @@ listen(regexFactory.startsWith(["blocks"]), function (match, data, replyTo, from
 //       }
 
 //       calc(
-//         replyTo, 
-//         market, 
-//         parseFloat(params[0]), 
+//         replyTo,
+//         market,
+//         parseFloat(params[0]),
 //         params[1]
 //         );
 
@@ -270,4 +270,3 @@ listen(regexFactory.startsWith(["blocks"]), function (match, data, replyTo, from
 //   });
 
 // });
-
