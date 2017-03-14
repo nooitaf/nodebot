@@ -18,6 +18,17 @@ listen(regexFactory.startsWith(["boobs","tits","moobs","schloobs"]), function(ma
   irc.privmsg(replyTo, boobs, false);
 });
 
+
+listen(regexFactory.startsWith(["boobsen","titses","titsen","moobsen","schloobsen"]), function(match, data, replyTo) {
+	var boobs_count = Math.floor(Math.random() * BOOBS.length)
+	var boobs_string = ""
+	for (var i=0;i<boobs_count;i++){
+	  var boobs = BOOBS[Math.floor(Math.random() * BOOBS.length)];
+	  boobs_string = boobs_string + " " + boobs
+	}
+	irc.privmsg(replyTo, boobs_string, false);
+});
+
 var BOOB;
 
 BOOB = [
