@@ -28,6 +28,7 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
     if(response.statusCode == 200) {
       var power = JSON.parse(body);
       irc.privmsg(replyTo,JSON.stringify(power));
+    }
   });
 
 });
