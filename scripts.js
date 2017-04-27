@@ -49,6 +49,7 @@ module.exports = [
     'colortest',
     'foul',
     'ipv6',
-    'nmc'
+    'nmc',
+    'power'
     // 'twitter',
 ];
