@@ -27,7 +27,13 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
   request(requestObject, function(error, response, body) {
     if(response.statusCode == 200) {
       var power = JSON.parse(body);
-      irc.privmsg(replyTo,JSON.stringify(power));
+      if (power && power.watt && power.kwh){
+        irc.privmsg(replyTo, "~ " + power.watt + " W ~ " + power.kwh + " kWh ~");
+      } else if (power) {
+        irc.privmsg(replyTo,JSON.stringify(power));
+      } else {
+        irc.privmsg(replyTo,"meh.");
+      }
     }
   });
 
