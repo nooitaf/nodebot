@@ -50,6 +50,7 @@ module.exports = [
     'foul',
     'ipv6',
     'nmc',
-    'power'
+    'power',
+    'eliza'
     // 'twitter',
 ];

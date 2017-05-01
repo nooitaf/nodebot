@@ -1,33 +1,34 @@
 {
-    "name": "nodebot",
-    "private": true,
-    "version": "0.3.1",
-    "author": "Richard Carter <richard@richardcarter.org>",
-    "description": "IRC bot written in node.js",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Ricket/nodebot.git"
-    },
-    "keywords": [
-        "irc",
-        "bot"
-    ],
-    "dependencies": {
-        "coffee-script": "~1.9.0",
-        "goo.gl": "~0.1.2",
-        "lodash": "~2.4.1",
-        "oauth": "~0.9.11",
-        "timeago": "~0.1.0",
-        "node-telegram-bot-api": "^0.15.0",
-        "weather-js": "^1.0.2",
-        "request": "^2.74.0",
-        "jquery": "^3.1.0",
-        "jsdom": "^9.4.1",
-        "moment-timezone": "^0.5.10",
-        "tor-request": "^1.0.6",
-        "weather-js": "^1.0.2"
-    },
-    "engines": {
-        "node": "~0.10.36"
-    }
+  "name": "nodebot",
+  "private": true,
+  "version": "0.3.1",
+  "author": "Richard Carter <richard@richardcarter.org>",
+  "description": "IRC bot written in node.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ricket/nodebot.git"
+  },
+  "keywords": [
+    "irc",
+    "bot"
+  ],
+  "dependencies": {
+    "coffee-script": "~1.9.0",
+    "elizabot": "0.0.2",
+    "goo.gl": "~0.1.2",
+    "iconv": "^2.2.3",
+    "jquery": "^3.1.0",
+    "jsdom": "^9.4.1",
+    "lodash": "~2.4.1",
+    "moment-timezone": "^0.5.10",
+    "node-telegram-bot-api": "^0.15.0",
+    "oauth": "~0.9.11",
+    "request": "^2.74.0",
+    "timeago": "~0.1.0",
+    "tor-request": "^1.0.6",
+    "weather-js": "^1.0.2"
+  },
+  "engines": {
+    "node": "~0.10.36"
+  }
 }
