@@ -3,7 +3,7 @@ var elizas = {}
 
 listen(/PRIVMSG #nurds :(.+)/, function(match, data, to, from) {
   var message = String(match[1])
-  var nick = global.nodebot_prefs.nickname || "blap"
+  var nick = global && global.nodebot_prefs && global.nodebot_prefs.nickname || "x0p"
   // relevant ?
   if (to !== nick && message.indexOf(nick) !== 0) {
     return
