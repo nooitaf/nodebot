@@ -19,23 +19,17 @@ function calc(replyTo, market, amount, fiat){
 
   var bucket = {};
   market.forEach(function(item){
-    if (item.symbol === "krakenLTC") {
-      bucket['ltc2btc'] = item.avg;
-    }
-    if (item.symbol === "btceEUR") {
-      bucket['btc2eur'] = item.avg;
-    }
-    if (item.symbol === "btceUSD") {
-      bucket['btc2usd'] = item.avg;
+    if (item.id === "litecoin") {
+      bucket = item;
     }
   })
 
   var ltc = {
-    "usd": parseFloat( bucket.btc2usd*(1/bucket.ltc2btc) ),
-    "eur": parseFloat( bucket.btc2eur*(1/bucket.ltc2btc) ),
-    "btc": parseFloat( 1/bucket.ltc2btc )
+    "usd": bucket.price_usd,
+    "eur": bucket.price_usd * 0.92,
+    "btc": bucket.price_btc
   }
-  
+
   var output = '';
   var amount = parseFloat(amount);
   if(fiat) {
@@ -43,11 +37,11 @@ function calc(replyTo, market, amount, fiat){
       output = '' + amount.toFixed(2) + ' ' + fiat.toUpperCase() + ' ~ ' + (1.0/ltc[fiat]*amount).toFixed(8) + ' LTC';
     }
   } else {
-    output = 
-      '' + amount + ' LTC =' + 
+    output =
+      '' + amount + ' LTC =' +
       ' USD ' + (ltc.usd * amount).toFixed(2) + ' ~' +
       ' EUR ' + (ltc.eur * amount).toFixed(2) + ' ~' +
-      ' BTC ' + (ltc.btc * amount).toFixed(4) + ''; 
+      ' BTC ' + (ltc.btc * amount).toFixed(4) + '';
   }
 
   irc.privmsg(replyTo, output.toString("utf8"))
@@ -57,7 +51,8 @@ function calc(replyTo, market, amount, fiat){
 
 listen(regexFactory.startsWith(["ltc"]), function (match, data, replyTo, from) {
 
-  var url = 'http://api.bitcoincharts.com/v1/markets.json';
+  //var url = 'http://api.bitcoincharts.com/v1/markets.json';
+  var url = 'https://api.coinmarketcap.com/v1/ticker/'
 
   var requestObject = {
     uri: url,
@@ -91,9 +86,9 @@ listen(regexFactory.startsWith(["ltc"]), function (match, data, replyTo, from) {
       }
 
       calc(
-        replyTo, 
-        market, 
-        parseFloat(params[0]), 
+        replyTo,
+        market,
+        parseFloat(params[0]),
         params[1]
         );
 
@@ -103,4 +98,3 @@ listen(regexFactory.startsWith(["ltc"]), function (match, data, replyTo, from) {
   });
 
 });
-
