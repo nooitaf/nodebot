@@ -5,11 +5,11 @@ listen(/PRIVMSG #nurds :(.+)/, function(match, data, to, from) {
   var message = String(match[1])
   var nick = "x0p"
   // relevant ?
-  if (to !== nick && message.indexOf(nick) === -1) {
+  if (to !== nick && message.indexOf(nick) !== 0) {
     return
   }
   // clean
-  if (message.indexOf(nick) >= 0) {
+  if (message.indexOf(nick) == 0) {
     message = message.replace('x0p', '')
     message = message.replace(/^[,:]/, '').trim()
   }
