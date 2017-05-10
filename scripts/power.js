@@ -29,7 +29,7 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
       var power = JSON.parse(body);
       if (power && power.watt && power.kwh){
         var price = power.kwh * 0.22
-        irc.privmsg(replyTo, "[ " + power.watt + " W ][ Total: " + parseInt(power.kwh) + " kWh ~ " + price.toFixed(2) + " euro ]" );
+        irc.privmsg(replyTo, "" + power.watt + " W | Total: " + parseInt(power.kwh) + " kWh ~ " + price.toFixed(2) + " euro" );
       } else if (power) {
         irc.privmsg(replyTo,JSON.stringify(power));
       } else {
