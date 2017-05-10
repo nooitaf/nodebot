@@ -51,6 +51,7 @@ module.exports = [
     'ipv6',
     'nmc',
     'power',
-    'eliza'
+    'eliza',
+    'lastspoke'
     // 'twitter',
 ];
