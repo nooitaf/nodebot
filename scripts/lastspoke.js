@@ -15,7 +15,7 @@ function spokeSearch(user) {
   var messages = db.getAll();
   for (var i in messages) {
     var db_user = messages[i].split(" ")[0]
-    var db_date = new Date(messages[i].split(" ")[1])
+    var db_date = new Date(parseInt(messages[i].split(" ")[1]))
     if (db_user === user) {
       return db_date
     }
