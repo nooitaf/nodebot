@@ -52,6 +52,7 @@ module.exports = [
     'nmc',
     'power',
     'eliza',
-    'lastspoke'
+    'lastspoke',
+    'rules'
     // 'twitter',
 ];
