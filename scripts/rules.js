@@ -55,7 +55,7 @@ listen(regexFactory.startsWith(["rule"]), function (match, data, replyTo, from) 
 		irc.privmsg(replyTo, ' ~> usage: ~rule [1-47]   ~source: https://encyclopediadramatica.rs/Rules_Of_The_Internet');
 		return;
 	}
-  rule = paseInt(rule)
+  rule = parseInt(rule)
   if (!rule || rule > rules.length || rule < 0) {
     rule = Math.ceil(Math.random()*rules.length)
   }
