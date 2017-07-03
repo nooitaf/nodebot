@@ -35,6 +35,8 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
       } else {
         irc.privmsg(replyTo,"meh.");
       }
+    } else {
+      irc.privmsg(replyTo,"mehRROR: " + error);
     }
   });
 
