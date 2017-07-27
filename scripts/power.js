@@ -25,7 +25,7 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
   };
 
   request(requestObject, function(error, response, body) {
-    if(response.statusCode == 200) {
+    if(!error && response && response.statusCode === 200) {
       var power = JSON.parse(body);
       if (power && power.watt && power.kwh){
         var price = power.kwh * 0.1725
