@@ -17,7 +17,7 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
   var requestObject = {
     uri: url,
     strictSSL: false,
-    timeout: 2000,
+    timeout: 4000,
     encoding: null,
     headers: {
       'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31 Nodebot'
