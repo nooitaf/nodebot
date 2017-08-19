@@ -2,7 +2,7 @@
 // This code is licensed under the MIT license; see LICENSE.txt for details.
 
 // This script handles the following functions:
-//     xem - look up current xem (xem) market status from coinmarketcap.com
+//     xem - look up current NEM (xem) market status from coinmarketcap.com
 
 var request = require('request'),
   entities = require('./lib/entities'),
