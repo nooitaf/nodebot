@@ -53,6 +53,7 @@ module.exports = [
     'power',
     'eliza',
     'lastspoke',
-    'rules'
+    'rules',
+    'xem'
     // 'twitter',
 ];
