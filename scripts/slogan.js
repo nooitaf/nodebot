@@ -592,7 +592,7 @@ var request = require('request'),
   entities = require('./lib/entities'),
   fs = require('fs');
 
-listen(regexFactory.startsWith(["slogan","pro","dat"]), function (match, data, replyTo, from) {
+listen(regexFactory.startsWith(["slogan","pro","dat","them","dem","deze","that"]), function (match, data, replyTo, from) {
   var words = match[1];
   var words = words.trim();
   // while (   words.replace(/    /g, '    ').length < words.length){
@@ -616,6 +616,6 @@ listen(regexFactory.startsWith(["slogan","pro","dat"]), function (match, data, r
     if (!db.hasValue(words)) db.add(words);
     words = words.capitalize();
     var slogan = randomSlogan().split('____').join(words);
-    irc.privmsg(replyTo,slogan); 
+    irc.privmsg(replyTo,slogan);
   }
 })
