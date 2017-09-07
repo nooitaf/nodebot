@@ -113,12 +113,6 @@ listen(regexFactory.startsWith(["penises","piemels","cocks","dicks","pikken","lu
 
 var BALLS;
 
-listen(regexFactory.startsWith(["ass","moon","balls","butt","kont","arsch","ballen","testicles"]), function(match, data, replyTo) {
-  var balls = BALLS[Math.floor(Math.random() * BALLS.length)];
-  irc.privmsg(replyTo, balls, false);
-});
-
-
 BALLS = [
   "(  Y  )",
   "(   )(   )",
@@ -128,3 +122,18 @@ BALLS = [
   "OO",
   "oo"
 ];
+
+listen(regexFactory.startsWith(["ass","moon","balls","butt","kont","arsch","ballen","testicles"]), function(match, data, replyTo) {
+  var balls = BALLS[Math.floor(Math.random() * BALLS.length)];
+  irc.privmsg(replyTo, balls, false);
+});
+
+listen(regexFactory.startsWith(["asses","moons","butts","konten","aersche"]), function(match, data, replyTo) {
+	var butts_count = Math.floor(Math.random() * BALLS.length)
+	var butts_string = ""
+	for (var i=0;i<butts_count;i++){
+	  var butts = BALLS[Math.floor(Math.random() * BALLS.length)];
+	  butts_string = butts_string + " " + butts
+	}
+  irc.privmsg(replyTo, butts_string, false);
+});
