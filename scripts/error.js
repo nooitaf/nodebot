@@ -69,7 +69,7 @@ listen(regexFactory.startsWith(["error","err","fail"]), function (match, data, r
   }
   var found_string = errz[str]
   if (found_string) {
-    irc.privmsg(replyTo, found_string);
+    irc.privmsg(replyTo, str + " " + found_string);
   } else {
     irc.privmsg(replyTo, ' ~> error ' + str + ' not found');
   }
