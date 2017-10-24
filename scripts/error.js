@@ -68,7 +68,7 @@ listen(regexFactory.startsWith(["error","err","fail"]), function (match, data, r
     str = errz[Object.keys(errz)[Math.floor(Math.random() * Object.keys(errz).length)]]
   }
   var found_string = errz[str]
-  if (found_string.length) {
+  if (found_string) {
     irc.privmsg(replyTo, found_string);
   } else {
     irc.privmsg(replyTo, ' ~> error ' + msg + ' not found');
