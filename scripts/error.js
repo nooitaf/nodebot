@@ -71,6 +71,6 @@ listen(regexFactory.startsWith(["error","err","fail"]), function (match, data, r
   if (found_string) {
     irc.privmsg(replyTo, found_string);
   } else {
-    irc.privmsg(replyTo, ' ~> error ' + msg + ' not found');
+    irc.privmsg(replyTo, ' ~> error ' + str + ' not found');
   }
 });
