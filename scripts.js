@@ -54,6 +54,7 @@ module.exports = [
     'eliza',
     'lastspoke',
     'rules',
-    'xem'
+    'xem',
+    'error'
     // 'twitter',
 ];
