@@ -65,7 +65,7 @@ listen(regexFactory.startsWith(["error","err","fail"]), function (match, data, r
 		return;
 	}
   if (!str.length) {
-    str = errz[Object.keys(errz)[Math.floor(Math.random() * Object.keys(errz).length)]]
+    str = Object.keys(errz)[Math.floor(Math.random() * Object.keys(errz).length)]
   }
   var found_string = errz[str]
   if (found_string) {
