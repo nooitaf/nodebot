@@ -33,7 +33,13 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
         url = 'http://' + url;
     }
 
-    console.log('title: Found url: "' + url + '"');
+    console.log('title: Found url: "' + url + '" ' + url.length);
+    url = url.replace(/\s{2,}/g, "");
+    url = url.replace(/^\s+/, "");
+    url = url.replace(/\s+$/, "");
+    url = url.replace(/\r?\n|\r/gm, "");
+    console.log('"' + url + '" ' + url.length);
+
     if (!dbHasValue(url)) {
         db.add(url);
     }
