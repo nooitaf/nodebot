@@ -34,7 +34,11 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
     }
 
     // /me fix
-    if (url.charCodeAt(url.length-1) == 1) url[url.length-1] = ""
+    console.log(url.charCodeAt(url.length-1))
+    if (url.charCodeAt(url.length-1) === 1) {
+      url = url.slice(0,-1)
+    }
+    console.log(url.charCodeAt(url.length-1))
 
     console.log('title: Found url: "' + url + '"');
 
