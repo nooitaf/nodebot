@@ -33,7 +33,7 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
         url = 'http://' + url;
     }
 
-    console.log('title: Found url: ' + url);
+    console.log('title: Found url: "' + url + '"');
     if (!dbHasValue(url)) {
         db.add(url);
     }
@@ -58,7 +58,7 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
         var req = request({url: url});
         req.on('error', function (error) {
             if((""+error).indexOf('SSL routines') < 0) {
-                irc.privmsg(replyTo, "Error looking up URL: " + error);
+                irc.privmsg(replyTo, "Error looking up URL(2): " + error);
             }
         });
         var hostname = "";
@@ -94,10 +94,10 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
                 foundTitle = true;
 
                 var title = titleMatch[1];
-                
+
                 // replace multi-spaces/newlines with spaces
                 title = title.replace(/\s{2,}/g, " ");
-                
+
                 // trim front and back
                 title = title.replace(/^\s+/, "");
                 title = title.replace(/\s+$/, "");
