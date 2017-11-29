@@ -37,6 +37,7 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
     url2.length = url2.length-1
 
     console.log('title: Found url_1: "' + url + '" ' + url.length + ' "'+url[url.length-1]+'" charcode: ' + url.charCodeAt(url.length-1));
+    console.log('title: Found url_2: "' + url2 + '" ' + url2.length + ' "'+url2[url2.length-1]+'" charcode: ' + url2.charCodeAt(url2.length-1));
     if (url == url2) console.log('url == url2')
     if (url != url2) console.log('url != url2')
     if (url === url2) console.log('url === url2')
