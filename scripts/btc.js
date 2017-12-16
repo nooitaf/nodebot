@@ -1,9 +1,9 @@
+var db = require('./lib/listdb').getDB('btc')
 var request = require('request')
 var entities = require('./lib/entities')
 var fs = require('fs')
 var exec = require('child_process').exec
 var tr = require('tor-request')
-var db = require('./lib/listdb').getDB('btc')
 
 function getATH() {
   var messages = db.getAll();
@@ -67,7 +67,7 @@ function getMarketBtc(){
     }
   };
 
-  request(requestObject, function(error, response, body) {
+  return request(requestObject, function(error, response, body) {
     if(response.statusCode == 200) {
       var market = JSON.parse(body);
       var btc = {
@@ -112,7 +112,7 @@ function calc(replyTo, market, amount, fiat){
   }
 
   if (checkATH(btc, true)) {
-    output = output + ' ~ All Time High'
+    output = output + ' ~ *NEW ALL TIME HIGH*'
   }
 
   irc.privmsg(replyTo, output.toString("utf8"))
