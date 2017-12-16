@@ -37,7 +37,7 @@ function cleanName(name){
   // is it 103?
   if (name.match('103$')) name = "103"
   // is it the0
-  if (ame.match('the+\\d')) name = "the0"
+  if (name.match('the+\\d')) name = "the0"
 
   return name
 }
