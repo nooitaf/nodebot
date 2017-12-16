@@ -16,6 +16,7 @@ var db = require('./lib/listdb').getDB('btc');
 
 function getATH() {
   var messages = db.getAll();
+  if (!messages.length) messages[0] = "0 0 0"
   var market = messages[0].split(" ")
   var ath = {
     usd: market[0],
@@ -27,6 +28,7 @@ function getATH() {
 
 function setATH(ath){
   var messages = db.getAll();
+  if (!messages.length) messages[0] = "0 0 0"
   var market = messages[0]
   db.remove(market)
   db.add(ath.usd + " " + " " + ath.eur + " " + ath.date.getTime())
