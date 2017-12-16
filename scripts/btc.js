@@ -1,18 +1,9 @@
-// (c) 2012 Richard Carter
-// This code is licensed under the MIT license; see LICENSE.txt for details.
-
-// This script handles the following functions:
-//     btc - look up current btc market status
-
-//
-
-var request = require('request'),
-  entities = require('./lib/entities'),
-  fs = require('fs'),
-  exec = require('child_process').exec;
-
-
-var db = require('./lib/listdb').getDB('btc');
+var request = require('request')
+var entities = require('./lib/entities')
+var fs = require('fs')
+var exec = require('child_process').exec
+var tr = require('tor-request')
+var db = require('./lib/listdb').getDB('btc')
 
 function getATH() {
   var messages = db.getAll();
@@ -126,8 +117,6 @@ function calc(replyTo, market, amount, fiat){
 
   irc.privmsg(replyTo, output.toString("utf8"))
 }
-
-var tr = require('tor-request');
 
 listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
 
