@@ -22,7 +22,7 @@ function setATH(ath){
   if (!messages.length) messages[0] = "0 0 0"
   var market = messages[0]
   db.remove(market)
-  db.add(ath.usd + " " + " " + ath.eur + " " + ath.date.getTime())
+  db.add(ath.usd + " " + ath.eur + " " + ath.date.getTime())
 }
 
 function niceDateATH(date){
