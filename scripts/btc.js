@@ -7,22 +7,27 @@ var tr = require('tor-request')
 
 function getATH() {
   var messages = db.getAll();
-  if (!messages.length) messages[0] = "0 0 0"
-  var market = messages[0].split(" ")
+  var market = []
+  if (messages.length) {
+    market = messages[0].split(" ")
+  } else {
+    market = [0,0,0]
+  }
   var ath = {
     usd: parseFloat(market[0]),
     eur: parseFloat(market[1]),
     date: new Date(parseInt(market[2]))
   }
-  console.log(ath)
   return ath
 }
 
 function setATH(ath){
   var messages = db.getAll();
-  if (!messages.length) messages[0] = "0 0 0"
-  var market = messages[0]
-  db.remove(market)
+  if (messages.length) {
+    for (var i=0;i<messages.length;i++){
+      db.remove(messages[i])
+    }
+  }
   db.add("" + ath.usd + " " + ath.eur + " " + ath.date.getTime())
 }
 
@@ -39,8 +44,7 @@ function checkATH(btc, replyTo){
       ATH.eur = btc.eur
       ATH.date = new Date()
       setATH(ATH)
-      if (replyTo)
-        showATH(replyTo)
+      if (replyTo) showATH(replyTo)
       return true
     }
   }
