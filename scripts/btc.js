@@ -12,7 +12,7 @@ function getATH() {
   var ath = {
     usd: market[0],
     eur: market[1],
-    date: market[2]
+    date: new Date(market[2])
   }
   return ath
 }
