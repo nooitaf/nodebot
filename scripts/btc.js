@@ -170,7 +170,7 @@ listen(regexFactory.startsWith(["blocks"]), function (match, data, replyTo, from
       var result = JSON.parse(body)
       if (result && result.n_blocks_total) {
         var blocks = parseInt(result.n_blocks_total)
-        var blocksleft = 420000 - blocks
+        var blocksleft = 630000 - blocks
         var blockslefttext = ""
         if (blocksleft) {
           blockslefttext = " | blocks to go: " + blocksleft
