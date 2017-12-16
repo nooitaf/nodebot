@@ -32,8 +32,8 @@ function niceDateATH(date){
 }
 
 function checkATH(btc, replyTo){
-  var ATH = getATH()
   if (btc) {
+    var ATH = getATH()
     if (btc.usd > ATH.usd) {
       ATH.usd = btc.usd
       ATH.eur = btc.eur
@@ -121,7 +121,7 @@ function calc(replyTo, market, amount, fiat){
 
   }
 
-  if (checkATH(btc, true)) {
+  if (checkATH(btc)) {
     output = output + ' ~ *NEW ALL TIME HIGH*'
   }
 
@@ -162,8 +162,8 @@ listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
         return;
       }
 
-      if (params[0]) params[0] = params[0].replace(',','.');
-      if (params[1]) params[1] = params[1].replace(',','.');
+      if (params[0] && params[0].replace) params[0] = params[0].replace(',','.');
+      if (params[1] && params[1].replace) params[1] = params[1].replace(',','.');
 
       if (isNumber(params[0]) && !isNumber(params[1])){
 
