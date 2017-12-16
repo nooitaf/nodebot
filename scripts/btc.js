@@ -6,11 +6,92 @@
 
 //
 
-
 var request = require('request'),
   entities = require('./lib/entities'),
   fs = require('fs'),
   exec = require('child_process').exec;
+
+
+var db = require('./lib/listdb').getDB('btc');
+
+function getATH() {
+  var messages = db.getAll();
+  var market = messages[0].split(" ")
+  var ath = {
+    usd: market[0],
+    eur: market[1],
+    date: market[2]
+  }
+  return ath
+}
+
+function setATH(ath){
+  var messages = db.getAll();
+  var market = messages[0]
+  db.remove(market)
+  db.add(ath.usd + " " + " " + ath.eur + " " + ath.date.getTime())
+}
+
+function niceDateATH(date){
+  var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false };
+  return date.toLocaleDateString("en-US",options);
+}
+
+function checkATH(btc, replyTo){
+  var ATH = getATH()
+  if (!btc) {
+    btc = getMarketBtc()
+  }
+  if (btc) {
+    if (btc.usd > ATH.usd) {
+      ATH.usd = btc.usd
+      ATH.eur = btc.eur
+      ATH.date = new Date()
+      setATH(ATH)
+      if (replyTo) {
+        var output =
+          'ATH: 1 BTC =' +
+          ' USD ' + (ATH.usd).toFixed(2) + ' ~' +
+          ' EUR ' + (ATH.eur).toFixed(2) + ' ~' +
+          ' ' + niceDateATH(ATH.date);
+        irc.privmsg(replyTo,output);
+      }
+      return true
+    }
+  }
+  return false
+}
+
+function getMarketBtc(){
+  var url = 'https://blockchain.info/ticker';
+  var requestObject = {
+    uri: url,
+    strictSSL: false,
+    timeout: 2000,
+    encoding: null,
+    headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31 Nodebot'
+    }
+  };
+
+  request(requestObject, function(error, response, body) {
+    if(response.statusCode == 200) {
+      var market = JSON.parse(body);
+      var btc = {
+        "eur": parseFloat(market["EUR"]["15m"]),
+        "usd": parseFloat(market["USD"]["15m"])
+      }
+      return btc
+    } else {
+      return false
+    }
+  });
+}
+
+
+listen(regexFactory.startsWith(["ath"]), function (match, data, replyTo, from) {
+  checkATH(false,replyTo)
+});
 
 
 function printHelp(replyTo){
@@ -35,6 +116,10 @@ function calc(replyTo, market, amount, fiat){
       ' USD ' + (btc.usd * amount).toFixed(2) + ' ~' +
       ' EUR ' + (btc.eur * amount).toFixed(2) + ' ';
 
+  }
+
+  if (checkATH(btc, true)) {
+    output = output + ' ~ All Time High'
   }
 
   irc.privmsg(replyTo, output.toString("utf8"))
@@ -185,88 +270,3 @@ listen(regexFactory.startsWith(["blocks"]), function (match, data, replyTo, from
   });
 
 });
-
-
-
-// var request = require('request'),
-//   entities = require('./lib/entities'),
-//   fs = require('fs'),
-//   exec = require('child_process').exec;
-
-
-// function printHelp(replyTo){
-//   irc.privmsg(replyTo, '~btc [amount, default 1] [[eur,usd]]');
-// }
-
-
-// function calc(replyTo, market, amount, fiat){
-//   var btc = {
-//     "eur": parseFloat(market["EUR"]["24h"]),
-//     "usd": parseFloat(market["USD"]["24h"])
-//   }
-//   var output = '';
-//   var amount = parseFloat(amount);
-//   if(fiat) {
-//     if (fiat === 'eur' || fiat === 'usd'){
-//       output = '' + amount.toFixed(2) + ' ' + fiat.toUpperCase() + ' ~ ' + (1.0/btc[fiat]*amount).toFixed(8) + ' BTC';
-//     }
-//   } else {
-//     output =
-//       '' + amount + ' BTC =' +
-//       ' USD ' + (btc.usd * amount).toFixed(2) + ' ~' +
-//       ' EUR ' + (btc.eur * amount).toFixed(2) + ' ';
-
-//   }
-
-//   irc.privmsg(replyTo, output.toString("utf8"))
-// }
-
-
-
-// listen(regexFactory.startsWith(["btc"]), function (match, data, replyTo, from) {
-
-//   var url = 'http://api.bitcoincharts.com/v1/weighted_prices.json';
-//   var requestObject = {
-//     uri: url,
-//     strictSSL: false,
-//     timeout: 10000,
-//     encoding: null,
-//     headers: {
-//       'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31 Nodebot'
-//     }
-//   };
-
-//   request(requestObject, function(error, response, body) {
-//     if(response.statusCode == 200) {
-//       var market = JSON.parse(body);
-
-//       // default
-//       if (match[1].trim().length === 0) {
-//         calc(replyTo, market,1)
-//         return;
-//       }
-
-//       var params = match[1].split(' ');
-//       if (params.length !== 1 && params.length !== 2) {
-//         printHelp(replyTo)
-//         return;
-//       }
-
-//       if (params[0] === 'help') {
-//         printHelp(replyTo)
-//         return;
-//       }
-
-//       calc(
-//         replyTo,
-//         market,
-//         parseFloat(params[0]),
-//         params[1]
-//         );
-
-//     } else {
-//       irc.privmsg(replyTo,"error: could not get market");
-//     }
-//   });
-
-// });
