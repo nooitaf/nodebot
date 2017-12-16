@@ -83,7 +83,7 @@ function checkATHRequest(replyTo){
           ATH.eur = btc.eur
           ATH.date = new Date()
           setATH(ATH)
-        } 
+        }
         if (replyTo) showATH(replyTo)
       }
     }
@@ -91,7 +91,7 @@ function checkATHRequest(replyTo){
 }
 
 
-listen(regexFactory.startsWith(["btc-ath"]), function (match, data, replyTo, from) {
+listen(regexFactory.startsWith(["btcath"]), function (match, data, replyTo, from) {
   checkATHRequest(replyTo)
 });
 
