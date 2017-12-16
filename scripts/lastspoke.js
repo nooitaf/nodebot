@@ -1,6 +1,7 @@
 var db = require('./lib/listdb').getDB('lastspoke');
 
 function spokeEvent(user) {
+  user = cleanName(user)
   var messages = db.getAll();
   for (var i in messages) {
     var db_user = messages[i].split(" ")[0]
@@ -12,6 +13,7 @@ function spokeEvent(user) {
 }
 
 function spokeSearch(user) {
+  user = cleanName(user)
   var messages = db.getAll();
   for (var i in messages) {
     var db_user = messages[i].split(" ")[0]
@@ -21,6 +23,23 @@ function spokeSearch(user) {
     }
   }
   return false
+}
+
+function cleanName(name){
+  // to lower case
+  name = name.toLowerCase()
+  // remove underline(s)
+  name = name.replace(/_/g,'')
+  // remove matrix
+  if (name.match('\\[m\\]$')) {
+    name = name.replace('[m]','')
+  }
+  // is it 103?
+  if (name.match('103$')) name = "103"
+  // is it the0
+  if (ame.match('the+\\d')) name = "the0"
+
+  return name
 }
 
 listen(/PRIVMSG #nurds :(.+)/, function(match, data, to, from) {
