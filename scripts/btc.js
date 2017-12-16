@@ -32,30 +32,32 @@ function niceDateATH(date){
 
 function checkATH(btc, replyTo){
   var ATH = getATH()
-  if (!btc) {
-    btc = getMarketBtc()
-  }
   if (btc) {
     if (btc.usd > ATH.usd) {
       ATH.usd = btc.usd
       ATH.eur = btc.eur
       ATH.date = new Date()
       setATH(ATH)
-      if (replyTo) {
-        var output =
-          'ATH: 1 BTC =' +
-          ' USD ' + (ATH.usd).toFixed(2) + ' ~' +
-          ' EUR ' + (ATH.eur).toFixed(2) + ' ~' +
-          ' ' + niceDateATH(ATH.date);
-        irc.privmsg(replyTo,output);
-      }
+      if (replyTo)
+        showATH(replyTo)
       return true
     }
   }
   return false
 }
 
-function getMarketBtc(){
+function showATH(replyTo){
+  var ATH = getATH()
+  var output =
+    'ATH: 1 BTC =' +
+    ' USD ' + (ATH.usd).toFixed(2) + ' ~' +
+    ' EUR ' + (ATH.eur).toFixed(2) + ' ~' +
+    ' ' + niceDateATH(ATH.date);
+  irc.privmsg(replyTo,output);
+}
+
+
+function checkATHRequest(replyTo){
   var url = 'https://blockchain.info/ticker';
   var requestObject = {
     uri: url,
@@ -67,23 +69,30 @@ function getMarketBtc(){
     }
   };
 
-  return request(requestObject, function(error, response, body) {
+  request(requestObject, function(error, response, body) {
     if(response.statusCode == 200) {
       var market = JSON.parse(body);
       var btc = {
         "eur": parseFloat(market["EUR"]["15m"]),
         "usd": parseFloat(market["USD"]["15m"])
       }
-      return btc
-    } else {
-      return false
+      if (btc) {
+        var ATH = getATH()
+        if (btc.usd > ATH.usd) {
+          ATH.usd = btc.usd
+          ATH.eur = btc.eur
+          ATH.date = new Date()
+          setATH(ATH)
+          if (replyTo) showATH(replyTo)
+        }
+      }
     }
   });
 }
 
 
 listen(regexFactory.startsWith(["ath"]), function (match, data, replyTo, from) {
-  checkATH(false,replyTo)
+  checkATHRequest(replyTo)
 });
 
 
