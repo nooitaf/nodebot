@@ -10,8 +10,8 @@ function getATH() {
   if (!messages.length) messages[0] = "0 0 0"
   var market = messages[0].split(" ")
   var ath = {
-    usd: market[0],
-    eur: market[1],
+    usd: parseFloat(market[0]),
+    eur: parseFloat(market[1]),
     date: new Date(parseInt(market[2]))
   }
   return ath
