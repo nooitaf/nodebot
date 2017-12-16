@@ -50,8 +50,8 @@ function showATH(replyTo){
   var ATH = getATH()
   var output =
     'ATH: 1 BTC =' +
-    ' USD ' + (ATH.usd).toFixed(2) + ' ~' +
-    ' EUR ' + (ATH.eur).toFixed(2) + ' ~' +
+    ' USD ' + parseFloat(ATH.usd).toFixed(2) + ' ~' +
+    ' EUR ' + parseFloat(ATH.eur).toFixed(2) + ' ~' +
     ' ' + niceDateATH(ATH.date);
   irc.privmsg(replyTo,output);
 }
