@@ -21,6 +21,7 @@ listen(regexFactory.startsWith(["boobs","tits","moobs","schloobs"]), function(ma
 
 listen(regexFactory.startsWith(["boobsen","titses","titsen","moobsen","schloobsen"]), function(match, data, replyTo) {
 	var boobs_count = Math.floor(Math.random() * BOOBS.length)
+  if (boobs_count < 2) boobs_count = 2
 	var boobs_string = ""
 	for (var i=0;i<boobs_count;i++){
 	  var boobs = BOOBS[Math.floor(Math.random() * BOOBS.length)];
@@ -72,6 +73,7 @@ listen(regexFactory.startsWith(["vagina","vag","pussy","kut","fanny","anus"]), f
 
 listen(regexFactory.startsWith(["vaginas","vags","pussies","kutten","fannies","anuses","ani"]), function(match, data, replyTo) {
 	var vagina_count = Math.floor(Math.random() * VAGINAS.length)
+  if (vagina_count < 2) vagina_count = 2
 	var vagina_string = ""
 	for (var i=0;i<vagina_count;i++){
 	  var vagina = VAGINAS[Math.floor(Math.random() * VAGINAS.length)];
@@ -103,6 +105,7 @@ listen(regexFactory.startsWith(["penis","piemel","cock","dick","pik","lul","vlee
 
 listen(regexFactory.startsWith(["penises","piemels","cocks","dicks","pikken","lullen","vleeslassos","kwarkkannonen"]), function(match, data, replyTo) {
 	var penis_count = Math.floor(Math.random() * PENISES.length)
+  if (penis_count < 2) penis_count = 2
 	var penis_string = ""
 	for (var i=0;i<penis_count;i++){
 	  var penis = PENISES[Math.floor(Math.random() * PENISES.length)];
@@ -128,8 +131,9 @@ listen(regexFactory.startsWith(["ass","moon","balls","butt","kont","arsch","ball
   irc.privmsg(replyTo, balls, false);
 });
 
-listen(regexFactory.startsWith(["asses","moons","butts","konten","aersche"]), function(match, data, replyTo) {
+listen(regexFactory.startsWith(["asses","moons","butts","konten","aersche","moons","ballses","testicleses"]), function(match, data, replyTo) {
 	var butts_count = Math.floor(Math.random() * BALLS.length)
+  if (butts_count < 2) butts_count = 2
 	var butts_string = ""
 	for (var i=0;i<butts_count;i++){
 	  var butts = BALLS[Math.floor(Math.random() * BALLS.length)];
