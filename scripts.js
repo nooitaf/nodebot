@@ -37,7 +37,7 @@ module.exports = [
     'speak',
     'mac',
     'oui',
-    'newyear',
+    // 'newyear',
     'ltc',
     'slogan',
     'anti',
