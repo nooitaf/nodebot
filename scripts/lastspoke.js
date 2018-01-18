@@ -46,7 +46,7 @@ listen(/PRIVMSG #nurds :(.+)/, function(match, data, to, from) {
   spokeEvent(from)
 });
 
-listen(regexFactory.startsWith("lastspoke"), function(match, data, replyTo, from) {
+listen(regexFactory.startsWith(["lastspoke","lastseen"]), function(match, data, replyTo, from) {
   // default
   if (match[1].trim().length === 0 || match[1].trim() === 'help') {
     irc.privmsg(replyTo, "Usage: lastspoke {user}");
