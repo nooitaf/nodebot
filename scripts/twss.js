@@ -19,3 +19,11 @@ listen(regexFactory.only("twis"), function(match, data, replyTo) {
 listen(regexFactory.only("twws"), function(match, data, replyTo) {
     irc.privmsg(replyTo, "that's what we said");
 });
+
+listen(regexFactory.only("twts"), function(match, data, replyTo) {
+    irc.privmsg(replyTo, "that's what they said");
+});
+
+listen(regexFactory.only("twys"), function(match, data, replyTo) {
+    irc.privmsg(replyTo, "that's what you said");
+});
