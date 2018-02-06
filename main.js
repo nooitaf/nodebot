@@ -128,7 +128,7 @@ var irc = global.nodebot = (function () {
                 }
             }
         }
-        
+
         pingServer();
     }
 
@@ -266,8 +266,8 @@ var irc = global.nodebot = (function () {
                     message = sanitize(message);
                     //message = message;
                 }
-                
-                var privmsg = "PRIVMSG " + user + " :";
+
+                var privmsg = "NOTICE " + user + " :";  // change pack to PRIVMSG if annoying
                 var max = 510 - privmsg.length;
 
                 var maxmessages = 3;
