@@ -90,6 +90,13 @@ listen(regexFactory.startsWith(["size"]), function(match, data, replyTo, from) {
       }
     });
     req.on('response', function(response) {
+      // Check size again for nosniff x-content
+      size = response.headers['content-length'];
+      if (size && size > maxSize) {
+          irc.privmsg(replyTo, "size: " + Math.floor(size/1024/1024) + " MB");
+          req.abort();
+          return;
+      }
       var statusCode = response.statusCode;
       if (statusCode != 200) {
         req.abort();
@@ -98,7 +105,7 @@ listen(regexFactory.startsWith(["size"]), function(match, data, replyTo, from) {
         if (statusCode != 403) {
           irc.privmsg(replyTo, "" + response.statusCode);
         }
-      } 
+      }
       console.log(response);
       var hostname = response.request.host;
       var encoding = response.request.encoding;

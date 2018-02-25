@@ -70,6 +70,14 @@ listen(/PRIVMSG [^ ]+ :.*?\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2
         req.on('response', function (response) {
             hostname = response.request.host;
 
+            // Check size again for nosniff x-content
+            size = response.headers['content-length'];
+            if (size && size > maxSize) {
+                irc.privmsg(replyTo, "size: " + Math.floor(size/1024/1024) + " MB");
+                req.abort();
+                return;
+            }
+
             var statusCode = response.statusCode;
             if (statusCode != 200) {
                 req.abort();
