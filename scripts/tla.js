@@ -9,6 +9,6 @@ function tla(text){
 }
 
 listen(regexFactory.startsWith(["tla"]), function(match, data, replyTo) {
-  var tlaString = tla(match) || tla('tla all the things');
+  var tlaString = tla(match[1]) || tla('tla all the things');
   irc.privmsg(replyTo, tlaString);
 });
