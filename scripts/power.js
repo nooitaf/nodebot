@@ -31,14 +31,14 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
       // {"power":"407","energy":"287.808","current":"1.899","voltage":"233","meters":{"daily":{"current":3.561,"previous":11.705},"monthly":{"current":64.554,"previous":18.226}}}
       if (power && power.power && power.energy && power.current && power.voltage && power.meters){
         irc.privmsg(replyTo, " " 
-                    + power.current + "A ~ " 
-                    + power.voltage + "V ~ " 
-                    + power.power + "W ~ " 
-                    + power.energy + "kWh ~ [" 
+                    + power.current + "A | " 
+                    + power.voltage + "V | " 
+                    + power.power + "W | " 
+                    + power.energy + "kWh ~Daily:" 
                     + power.meters.daily.current + "/" 
-                    + power.meters.daily.previous + "|" 
+                    + power.meters.daily.previous + "|Monthly:" 
                     + power.meters.monthly.current + "/" 
-                    + power.meters.monthly.previous + "]" 
+                    + power.meters.monthly.previous + "~" 
                    );
       } else if (power) {
         irc.privmsg(replyTo,JSON.stringify(power));
