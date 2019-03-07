@@ -35,9 +35,9 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
                     + power.voltage + "V | " 
                     + power.power + "W | " 
                     //+ power.energy + "kWh "
-                    + " Daily: " 
+                    + "Daily: " 
                     + power.meters.daily.current + "/" 
-                    + power.meters.daily.previous + " | Monthly: " 
+                    + power.meters.daily.previous + " kWh | Monthly: " 
                     + power.meters.monthly.current + "/" 
                     + power.meters.monthly.previous + " kWh" 
                    );
