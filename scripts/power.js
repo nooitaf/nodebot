@@ -33,13 +33,13 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
         irc.privmsg(replyTo, " " 
                     + power.current + "A | " 
                     + power.voltage + "V | " 
-                    + power.power + "W | " 
+                    + power.power + "W ~ " 
                     //+ power.energy + "kWh "
-                    + "kWhStats[ "
+                    + "kWh-{"
                     + "Today:" + parseInt(power.meters.daily.current)  + "|"
                     + "Yesterday:" + parseInt(power.meters.daily.previous) + "|"
                     + "ThisMonth:" + parseInt(power.meters.monthly.current) + "|"
-                    + "LastMonth:" + parseInt(power.meters.monthly.previous) + "]" 
+                    + "LastMonth:" + parseInt(power.meters.monthly.previous) + "}-" 
                    );
       } else if (power) {
         irc.privmsg(replyTo,JSON.stringify(power));
