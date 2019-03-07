@@ -36,10 +36,10 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
                     + power.power + "W | " 
                     //+ power.energy + "kWh "
                     + "Daily: " 
-                    + power.meters.daily.current + "/" 
-                    + power.meters.daily.previous + " kWh | Monthly: " 
-                    + power.meters.monthly.current + "/" 
-                    + power.meters.monthly.previous + " kWh" 
+                    + parseInt(power.meters.daily.current) + "/" 
+                    + parseInt(power.meters.daily.previous) + " kWh | Monthly: " 
+                    + parseInt(power.meters.monthly.current) + "/" 
+                    + parseInt(power.meters.monthly.previous) + " kWh" 
                    );
       } else if (power) {
         irc.privmsg(replyTo,JSON.stringify(power));
