@@ -13,7 +13,7 @@ var tr = require('tor-request');
 
 listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from) {
 
-  var url = 'https://public.nurd.space/~zarya/power/api.php';
+  var url = 'http://space.nurdspace.nl/~zarya/power/api.php';
   var requestObject = {
     uri: url,
     strictSSL: false,
