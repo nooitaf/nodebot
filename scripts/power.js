@@ -35,7 +35,7 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
                     + power.voltage + "V | " 
                     + power.power + "W  " 
                     //+ power.energy + "kWh "
-                    + "Today:" + parseInt(power.meters.daily.current)  + "|"
+                    + "{Today:" + parseInt(power.meters.daily.current)  + "|"
                     + "Yesterday:" + parseInt(power.meters.daily.previous) + "|"
                     + "ThisMonth:" + parseInt(power.meters.monthly.current) + "|"
                     + "LastMonth:" + parseInt(power.meters.monthly.previous) + "}-kWh" 
