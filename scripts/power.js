@@ -27,9 +27,11 @@ listen(regexFactory.startsWith(["power"]), function (match, data, replyTo, from)
   request(requestObject, function(error, response, body) {
     if(!error && response && response.statusCode === 200) {
       var power = JSON.parse(body);
-      if (power && power.watt && power.kwh){
-        var price = power.kwh * 0.1725
-        irc.privmsg(replyTo, "" + power.watt + " W | Total: " + parseInt(power.kwh) + " kWh ~ " + price.toFixed(2) + " euro" );
+      // 381W | 1.767A | 233V | 287.973kWh
+      // {"power":"407","energy":"287.808","current":"1.899","voltage":"233","meters":{"daily":{"current":3.561,"previous":11.705},"monthly":{"current":64.554,"previous":18.226}}}
+      if (power && power.watt && power.energy && power.current && power.voltage && power.meters){
+        irc.privmsg(replyTo, " " + power.current + "A ~ " + power.voltage + "V ~ " + power.power + "W ~ " + power.energy + "kWh ~ [" \
+        + power.meters.daily.current + "/" + power.meters.daily.previous + "|" + power.meters.monthly.current + "/" + power.meters.monthly.previous + "]" );
       } else if (power) {
         irc.privmsg(replyTo,JSON.stringify(power));
       } else {
