@@ -66,12 +66,12 @@ VAGINAS = [
 	"(#)"
 ]
 
-listen(regexFactory.startsWith(["vagina","vag","pussy","kut","fanny","anus"]), function(match, data, replyTo) {
+listen(regexFactory.startsWith(["vagina","vag","pussy","kut","fanny","anus","vulva"]), function(match, data, replyTo) {
   var vagina = VAGINAS[Math.floor(Math.random() * VAGINAS.length)];
   irc.privmsg(replyTo, vagina, false);
 });
 
-listen(regexFactory.startsWith(["vaginas","vags","pussies","kutten","fannies","anuses","ani"]), function(match, data, replyTo) {
+listen(regexFactory.startsWith(["vaginas","vags","pussies","kutten","fannies","anuses","ani","vulvas","vulvae"]), function(match, data, replyTo) {
 	var vagina_count = Math.floor(Math.random() * VAGINAS.length)
   if (vagina_count < 2) vagina_count = 2
 	var vagina_string = ""
