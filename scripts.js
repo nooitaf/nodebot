@@ -35,7 +35,7 @@ module.exports = [
   'numbergame',
   'oui',
   'ping',
-  'power',
+  //'power',
   'rockpaperscissors',
   'rules',
   'sadtrombone',
