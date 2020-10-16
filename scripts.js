@@ -50,6 +50,7 @@ module.exports = [
   'tits',
   'tla',
   'twss',
+  'urban',
   'weather',
   'xem'
 ];
