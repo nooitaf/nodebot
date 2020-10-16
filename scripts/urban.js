@@ -6,7 +6,9 @@ listen(regexFactory.startsWith("urban"), function(match, data, replyTo) {
     .then(response => {
       console.log(response);
       if (response && response.statusCode === '200' && response.message === 'success'){
-        irc.privmsg(replyTo, response.definition[0]);
+        var txt = response.definition[0]
+        txt = txt.replace(/(?:\r\n|\r|\n)/g, ' ')
+        irc.privmsg(replyTo, txt);
       }
       /*
       {
