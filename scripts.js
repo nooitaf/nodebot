@@ -17,7 +17,7 @@ module.exports = [
   'eliza',
   'emoticons',
   'error',
-  'eval',
+  // 'eval',
   'excuse',
   'fact',
   'fire',
