@@ -98,12 +98,12 @@ PENISES = [
 	"°|°"
 ]
 
-listen(regexFactory.startsWith(["penis","piemel","cock","dick","pik","lul","vleeslasso","kwarkkannon"]), function(match, data, replyTo) {
+listen(regexFactory.startsWith(["penis","piemel","cock","dick","pik","lul","vleeslasso","kwarkkannon","πmol","piemol"]), function(match, data, replyTo) {
   var penis = PENISES[Math.floor(Math.random() * PENISES.length)];
   irc.privmsg(replyTo, penis, false);
 });
 
-listen(regexFactory.startsWith(["penises","piemels","cocks","dicks","pikken","lullen","vleeslassos","kwarkkannonen"]), function(match, data, replyTo) {
+listen(regexFactory.startsWith(["penises","piemels","cocks","dicks","pikken","lullen","vleeslassos","kwarkkannonen","πmols","piemols"]), function(match, data, replyTo) {
 	var penis_count = Math.floor(Math.random() * PENISES.length)
   if (penis_count < 2) penis_count = 2
 	var penis_string = ""
